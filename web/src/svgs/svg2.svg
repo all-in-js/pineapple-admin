@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>项目制</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="megicon" transform="translate(-437.000000, -1374.000000)">
+            <g id="编组-5" transform="translate(158.000000, 1374.000000)">
+                <g id="编组-8" transform="translate(279.000000, 0.000000)">
+                    <rect id="矩形" x="0" y="0" width="40" height="40"></rect>
+                    <rect id="矩形备份-6" fill="#2A77D6" opacity="0.2" x="12" y="6" width="20" height="24"></rect>
+                    <rect id="矩形" fill="#2A77D6" x="9" y="10" width="19" height="22"></rect>
+                    <polygon id="直线-2" fill="#FFFFFF" fill-rule="nonzero" points="28 16 28 17 9.01025098 17 9.01025098 16"></polygon>
+                    <polygon id="直线-2备份" fill="#FFFFFF" fill-rule="nonzero" points="23.5615342 12.5 23.5615342 13.5 10.5 13.5 10.5 12.5"></polygon>
+                    <path d="M23.5167242,25.5322829 L23.5167242,26.5322829 L10.5167242,26.5322829 L10.5167242,25.5322829 L23.5167242,25.5322829 Z M23.5167242,22.5322829 L23.5167242,23.5322829 L10.5167242,23.5322829 L10.5167242,22.5322829 L23.5167242,22.5322829 Z M23.5167242,19.5322829 L23.5167242,20.5322829 L10.5167242,20.5322829 L10.5167242,19.5322829 L23.5167242,19.5322829 Z" id="形状结合" fill="#FFFFFF" fill-rule="nonzero" opacity="0.4"></path>
+                    <path d="M25.6278928,12.5 C25.9040351,12.5 26.1278928,12.7238576 26.1278928,13 C26.1278928,13.2454599 25.9510176,13.4496084 25.7177684,13.4919443 L25.6278928,13.5 L25.5761746,13.5 C25.3000322,13.5 25.0761746,13.2761424 25.0761746,13 C25.0761746,12.7545401 25.2530497,12.5503916 25.4862989,12.5080557 L25.5761746,12.5 L25.6278928,12.5 Z" id="直线-2备份-2" fill="#FFFFFF" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

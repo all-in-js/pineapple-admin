@@ -1,0 +1,21 @@
+{
+  "name": "admin-page",
+  "version": "1.0.7",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "vite": "vite build",
+    "dist": "rm -rf dist && npm run vite"
+  },
+  "dependencies": {
+    "@megvii-icons/vue3-svg-icons": "^1.0.7",
+    "canvg": "^3.0.7",
+    "vue": "^3.0.0-rc.1",
+    "vue-router": "^4.0.0-beta.12"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.0-rc.1",
+    "sass": "^1.26.11",
+    "vite": "^1.0.0-rc.1"
+  }
+}

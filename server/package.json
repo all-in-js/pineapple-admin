@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "1.0.0-beta.1",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "rollup -c -w",
+    "start": "cross-env NODE_ENV=dev nodemon ./dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@megvii-icons/svgo": "^1.0.0-beta.1",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "formidable": "^1.2.2",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-mongo": "^1.9.2",
+    "koa-router": "^9.4.0",
+    "mongodb": "^3.6.2"
+  },
+  "devDependencies": {
+    "@types/formidable": "^1.0.31",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-router": "^7.4.1",
+    "@types/koa__cors": "^3.0.2",
+    "@types/mongodb": "^3.5.27",
+    "nodemon": "^2.0.4",
+    "rollup": "^2.28.2",
+    "rollup-plugin-esbuild": "^2.5.0"
+  }
+}
