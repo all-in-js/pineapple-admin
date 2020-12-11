@@ -46,7 +46,7 @@
           id="upload-field"
           @change="upload" /> -->
         <!-- <post-download
-          :action="`https://fe-cms.mcd.megvii-inc.com/v1/feicons/project/export?type=js&alias=${route.params.alias}`"
+          :action="`/v1/feicons/project/export?type=js&alias=${route.params.alias}`"
           :btnText="`导出 ${ route.params.alias }.js`"
           btnClass="upload-btn"></post-download> -->
         <post-download

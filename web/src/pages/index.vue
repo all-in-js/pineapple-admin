@@ -13,8 +13,8 @@
         <div class="si-extra-link">
           <span>latest: v{{ state.pkg['dist-tags'].latest }}</span>
           <router-link to="/docs"><span>使用文档</span></router-link>
-          <a target="_blank" href="https://design.megvii-inc.com/docs/company/base/icon"><span>MegIcon 组件</span></a>
-          <a target="_blank" href="https://fe-cms.mcd.megvii-inc.com/project"><span>图标管理</span></a>
+          <a target="_blank" href="/docs/company/base/icon"><span>MegIcon 组件</span></a>
+          <a target="_blank" href="/project"><span>图标管理</span></a>
           <router-link to="/about">关于</router-link>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <install-code />
         <p>// 使用</p>
         <div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-v">Vue</span> <span class="pl-k">from</span> <span class="pl-s">'vue'</span><span class="pl-kos">;</span>
-<span class="pl-k">import</span> <span class="pl-v">SvgIcon</span> <span class="pl-k">from</span> <span class="pl-s">'@megvii-icons/vue-svg-icons'</span><span class="pl-kos">;</span>
+<span class="pl-k">import</span> <span class="pl-v">SvgIcon</span> <span class="pl-k">from</span> <span class="pl-s">'vue-svg-icons'</span><span class="pl-kos">;</span>
 
 <span class="pl-v">Vue</span><span class="pl-kos">.</span><span class="pl-en">use</span><span class="pl-kos">(</span><span class="pl-v">SvgIcon</span><span class="pl-kos">,</span> <span class="pl-kos">{</span>
   <span class="pl-c1">tagName</span>: <span class="pl-s">'meg-icon'</span>
@@ -298,7 +298,7 @@ const IndexPage = {
       return state.loading && !state.projects.length;
     });
     const getLatestVersion = async () => {
-      const res = await fetch('https://npm-registry.megvii-inc.com/@megvii-icons/vue-svg-icons').then(res => res.json());
+      const res = await fetch('vue-svg-icons').then(res => res.json());
       if (res && res['dist-tags'] && res['dist-tags'].latest) {
         state.pkg = res;
       }

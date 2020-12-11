@@ -3,7 +3,7 @@
     <div class="logo-info">
       <router-link
         class="site-title"
-        to="/">Megvii-svg-icons</router-link>
+        to="/">svg-icons</router-link>
       <a href="/">v2.0.1</a>
     </div>
     <div class="nav-items">

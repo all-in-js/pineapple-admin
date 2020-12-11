@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-09 17:53:30
+ * @LastEditTime: 2020-12-11 15:08:33
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \opensources\pineapple-manage\web\src\components\install-code.vue
+-->
 <template>
   <div class="si-install-code highlight highlight-source-shell">
     <simple-icon
@@ -21,7 +29,7 @@ export default {
   setup() {
     const state = reactive({
       showCopyTip: false,
-      installTxt: 'npm i @megvii-icons/vue-svg-icons --registry https://npm-registry.megvii-inc.com',
+      installTxt: 'npm i ',
     });
 
     const copyInstall = () => {

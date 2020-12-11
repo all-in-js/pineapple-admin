@@ -68,7 +68,7 @@
       class="si-icon-code markdown-body entry-content container-lg" itemprop="text">
       <p>// 使用</p>
       <div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> <span class="pl-v">Vue</span> <span class="pl-k">from</span> <span class="pl-s">'vue'</span><span class="pl-kos">;</span>
-<span class="pl-k">import</span> <span class="pl-v">SvgIcon</span> <span class="pl-k">from</span> <span class="pl-s">'@megvii-icons/vue-svg-icons'</span><span class="pl-kos">;</span>
+<span class="pl-k">import</span> <span class="pl-v">SvgIcon</span> <span class="pl-k">from</span> <span class="pl-s">'vue-svg-icons'</span><span class="pl-kos">;</span>
 
 <span class="pl-v">Vue</span><span class="pl-kos">.</span><span class="pl-en">use</span><span class="pl-kos">(</span><span class="pl-v">SvgIcon</span><span class="pl-kos">,</span> <span class="pl-kos">{</span>
   <span class="pl-c1">tagName</span>: <span class="pl-s">'meg-icon'</span>

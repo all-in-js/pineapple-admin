@@ -3,7 +3,6 @@ import Cors from '@koa/cors';
 import Router from 'koa-router';
 import BodyParser from 'koa-bodyparser';
 import Upload from './utils/upload';
-import SvgOptimize from '@megvii-icons/svgo';
 import { ObjectID, ObjectId } from 'mongodb';
 import { resolveHome, ensureDirSync, readFileSync } from './utils/util';
 import download, { createTempFile } from './utils/download';

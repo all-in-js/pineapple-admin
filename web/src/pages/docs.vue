@@ -8,7 +8,7 @@
       <span>使用文档</span>  
     </div>
     <article class="markdown-body entry-content container-lg" itemprop="text">
-    <h2>Megvii-SVG-Icons</h2>
+    <h2>SVG-Icons</h2>
     <blockquote> 
       <p>基于 svg 的图标管理和组件化方案</p> 
     </blockquote> 
@@ -17,14 +17,14 @@
     </p> 
     <p>整体工作流程分为两步：</p> 
     <ol> 
-      <li><a href="https://fe-cms.mcd.megvii-inc.com/project" target="_blank">管理平台</a>，在这里可以新建一个项目，然后导入需要使用的 svg 图标，当然也能对图标进行增删改查等操作；</li> 
+      <li><a href="/project" target="_blank">管理平台</a>，在这里可以新建一个项目，然后导入需要使用的 svg 图标，当然也能对图标进行增删改查等操作；</li> 
       <li>项目中使用，在管理平台上的项目都有一个唯一标识 alias，通过这个标识符，可以在项目中使用时只拉取该项目下的图标，避免引入项目以外的图标；</li> 
     </ol> 
     <p>为了能够使各个项目的图标能够独立维护，且不加载项目以外的额外的图标，所以将图标的数据与组件进行了剥离，也就是按需加载项目所需的图标；并且能够保证数据有更新后，项目里能够即时同步，只需要配置一个 webpack loader，将项目的 alias 传入该 loader，即可实现管理平台上图标有更新后，无需重新构建和发布组件包即可使用到最新的图标；</p>
     <h3>
       <svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
         <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
-      </svg>vue 组件，@megvii-icons/vue-svg-icons</h3> 
+      </svg>vue 组件，svg-icons</h3> 
     <p>支持设置渐变、多色、兼容本地 svg 组件等特性，支持通过配置 webpack loader 自动同步管理平台上的图标数据集，也可以加载本地的图标数据集；</p> 
     <ul> 
       <li><strong>安装及使用</strong></li> 
@@ -32,7 +32,7 @@
     <install-code />
     <div class="highlight highlight-source-js">
       <pre style="width:100%"><span class="pl-k">import</span> <span class="pl-v">Vue</span> <span class="pl-k">from</span> <span class="pl-s">'vue'</span><span class="pl-kos">;</span>
-<span class="pl-k">import</span> <span class="pl-v">VueSvgIcons</span> <span class="pl-k">from</span> <span class="pl-s">'@megvii-icons/vue-svg-icons'</span><span class="pl-kos">;</span>
+<span class="pl-k">import</span> <span class="pl-v">VueSvgIcons</span> <span class="pl-k">from</span> <span class="pl-s">'vue-svg-icons'</span><span class="pl-kos">;</span>
 
 <span class="pl-v">Vue</span><span class="pl-kos">.</span><span class="pl-en">use</span><span class="pl-kos">(</span><span class="pl-v">VueSvgIcons</span><span class="pl-kos">,</span> <span class="pl-kos">{</span>
   <span class="pl-c1">tagName</span>: <span class="pl-s">'meg-icon'</span>
@@ -272,7 +272,7 @@
     <p></p>
     <p>由于组件默认不携带 svg 数据集，所以仅仅依靠组件还无法使用图标，目前支持两种方式导入 svg 数据到项目里来使用：</p>
     <h3>使用 webpack loader 自动同步数据集</h3> 
-    <p>在项目中安装 @megvii-icons/pull-svg-icons，并修改 webpack 配置，如下，复制粘贴，修改 projects 参数即可，projects 为项目的 alias 值，一般不会有多个，如果有多个的话用逗号隔开：</p>
+    <p>在项目中安装 pull-svg-icons，并修改 webpack 配置，如下，复制粘贴，修改 projects 参数即可，projects 为项目的 alias 值，一般不会有多个，如果有多个的话用逗号隔开：</p>
     <ul>
       <li>webpack 配置</li>
     </ul>
@@ -280,9 +280,9 @@
       <pre style="width:100%">rules: <span class="pl-kos">[</span>
   <span class="pl-kos">{</span>
     <span class="pl-c1">test</span>: <span class="pl-pds">/<span class="pl-cce">\.</span>js<span class="pl-cce">$</span>/</span><span class="pl-kos">,</span>
-    <span class="pl-c1">loader</span>: <span class="pl-s">'@megvii-icons/pull-svg-icons'</span><span class="pl-kos">,</span>
+    <span class="pl-c1">loader</span>: <span class="pl-s">'pull-svg-icons'</span><span class="pl-kos">,</span>
     <span class="pl-c1">options</span>: <span class="pl-kos">{</span>
-      <span class="pl-c1">requestUri</span>: <span class="pl-s">'https://fe-cms.mcd.megvii-inc.com/v1/feicons/svg/pullSvgIcons'</span><span class="pl-kos">,</span>
+      <span class="pl-c1">requestUri</span>: <span class="pl-s">'/v1/feicons/svg/pullSvgIcons'</span><span class="pl-kos">,</span>
       <span class="pl-c1">projects</span>: <span class="pl-s">'megdesign'</span>
     <span class="pl-kos">}</span>
   <span class="pl-kos">}</span>
@@ -296,10 +296,10 @@
     <span class="pl-kos">.</span><span class="pl-en">rule</span><span class="pl-kos">(</span><span class="pl-s">'meg-icon'</span><span class="pl-kos">)</span>
     <span class="pl-kos">.</span><span class="pl-en">test</span><span class="pl-kos">(</span><span class="pl-pds">/<span class="pl-cce">\.</span>js<span class="pl-cce">$</span>/</span><span class="pl-kos">)</span>
     <span class="pl-kos">.</span><span class="pl-en">use</span><span class="pl-kos">(</span><span class="pl-s">'pull-svg-icons'</span><span class="pl-kos">)</span>
-    <span class="pl-kos">.</span><span class="pl-en">loader</span><span class="pl-kos">(</span><span class="pl-s">'@megvii-icons/pull-svg-icons'</span><span class="pl-kos">)</span>
+    <span class="pl-kos">.</span><span class="pl-en">loader</span><span class="pl-kos">(</span><span class="pl-s">'pull-svg-icons'</span><span class="pl-kos">)</span>
     <span class="pl-kos">.</span><span class="pl-en">tap</span><span class="pl-kos">(</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c1">=&gt;</span> <span class="pl-kos">{</span>
       <span class="pl-k">return</span> <span class="pl-kos">{</span>
-        <span class="pl-c1">requestUri</span>: <span class="pl-s">'https://fe-cms.mcd.megvii-inc.com/v1/feicons/svg/pullSvgIcons'</span><span class="pl-kos">,</span>
+        <span class="pl-c1">requestUri</span>: <span class="pl-s">'/v1/feicons/svg/pullSvgIcons'</span><span class="pl-kos">,</span>
         <span class="pl-c1">projects</span>: <span class="pl-s">'cbg-icons'</span>
       <span class="pl-kos">}</span>
     <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
@@ -349,17 +349,17 @@
     <div class="highlight highlight-source-js">
       <pre style="width:100%">
 <span class="pl-k">import</span> <span class="pl-v">Vue</span> <span class="pl-k">from</span> <span class="pl-s">'vue'</span><span class="pl-kos">;</span>
-<span class="pl-k">import</span> <span class="pl-v">VueSvgIcons</span> <span class="pl-k">from</span> <span class="pl-s">'@megvii-icons/vue-svg-icons'</span><span class="pl-kos">;</span>
+<span class="pl-k">import</span> <span class="pl-v">VueSvgIcons</span> <span class="pl-k">from</span> <span class="pl-s">'vue-svg-icons'</span><span class="pl-kos">;</span>
 <span class="pl-k">import</span> <span class="pl-v">SvgIcons</span> <span class="pl-k">from</span> <span class="pl-s">'svgs.js'</span><span class="pl-kos">;</span>
 
 <span class="pl-v">Vue</span><span class="pl-kos">.</span><span class="pl-en">use</span><span class="pl-kos">(</span><span class="pl-v">VueSvgIcons</span><span class="pl-kos">,</span> <span class="pl-kos">{</span>
   <span class="pl-c1">svgIcons</span>: <span class="pl-v">SvgIcons</span>
 <span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre>
   </div> 
-  <h3>@megvii-icons/svgo</h3> 
+  <h3>svgo</h3> 
   <p>优化 svg 信息，删除多余节点，压缩 svg 体积，并将节点信息转为 js，方便统一管理和进一步的优化工作；</p> 
   <div class="highlight highlight-source-js">
-    <pre style="width:100%"><span class="pl-k">const</span> <span class="pl-kos">{</span> SvgOptimize <span class="pl-kos">}</span> <span class="pl-c1">=</span> <span class="pl-en">require</span><span class="pl-kos">(</span><span class="pl-s">'@megvii-icons/svgo'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <pre style="width:100%"><span class="pl-k">const</span> <span class="pl-kos">{</span> SvgOptimize <span class="pl-kos">}</span> <span class="pl-c1">=</span> <span class="pl-en">require</span><span class="pl-kos">(</span><span class="pl-s">'svgo'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
 <span class="pl-k">const</span> <span class="pl-s1">svgo</span> <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-v">SvgOptimize</span><span class="pl-kos">(</span><span class="pl-kos">{</span><span class="pl-c">/* svgo options */</span><span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
 
 <span class="pl-kos">(</span><span class="pl-k">async</span> <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c1">=&gt;</span> <span class="pl-kos">{</span>
@@ -378,9 +378,9 @@
     <h3>公共组件库集成</h3> 
     <ol>
       <li>当图标库被组件库集成时，由于组件库本身有图标数据，在项目中使用组件库时，项目也有自己的图标数据，就需要将两个地方的图标数据做一次合并，来给图标组件使用，并且需要保证图标可以自动同步；</li>
-      <li>目前统一的集成方案是：为组件库添加 postinstall 脚本，并将 @megvii-icons/vue-svg-icons 添加到 webpack 的 externals 选项中；</li>
-      <li>postinstall 脚本里通过一个 update-icon --projects 命令拉取指定项目的图标数据并将其挂载到 @megvii-icons/vue-svg-icons 组件中；</li>
-      <li>当安装最新的 @megvii-icons/vue-svg-icons 时即可获得 update-icon 命令</li>
+      <li>目前统一的集成方案是：为组件库添加 postinstall 脚本，并将 vue-svg-icons 添加到 webpack 的 externals 选项中；</li>
+      <li>postinstall 脚本里通过一个 update-icon --projects 命令拉取指定项目的图标数据并将其挂载到 vue-svg-icons 组件中；</li>
+      <li>当安装最新的 vue-svg-icons 时即可获得 update-icon 命令</li>
     </ol>
     </article>
   </div>

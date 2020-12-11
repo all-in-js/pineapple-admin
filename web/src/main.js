@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
-import VueSvgIcons from '@megvii-icons/vue3-svg-icons';
 import Index from '/@/pages/index.vue';
 import Docs from '/@/pages/docs.vue';
 import About from '/@/pages/about.vue';
@@ -12,7 +11,7 @@ import App from './App.vue';
 import './index.scss';
 
 const _fetch = window.fetch;
-const host = location.host.includes('megvii-inc.com') ? 'https://fe-cms.mcd.megvii-inc.com' : '';
+const host = location.host.includes('.com') ? '' : '';
 window.fetch = function(url, options) {
   if (!url.includes('npm-registry')) {
     url = host + url;
