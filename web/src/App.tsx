@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import IndexPage from './pages/index';
 
-function App() {
+function App(props: any) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app">
+        <header className="app-header">
+          <div className="app-header-info">
+            <span>菠萝</span>
+            <small>v1.0.1</small>
+            <p>基于 svg 的图标管理和组件化方案</p>
+          </div>
+          <div className="app-header-nav">
+            <Link to="/" className="app-header-nav-item">首页</Link>
+            <Link to="/" className="app-header-nav-item active">项目管理</Link>
+            <div className="app-header-nav-item">用户管理</div>
+            <div className="app-header-nav-item">使用文档</div>
+            <div className="app-header-nav-item">Github</div>
+            <div className="app-header-nav-item">EN / ZH</div>
+          </div>
+        </header>
+        <div className="app-page">
+          <Switch>
+            <Route path="/">
+              <IndexPage />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 
