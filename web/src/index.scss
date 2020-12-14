@@ -1,4 +1,5 @@
 $primary-color: #0170fe !default;
+$box-background: #fafafa !default;
 
 * {
   margin: 0;
@@ -6,6 +7,7 @@ $primary-color: #0170fe !default;
 }
 
 body {
+  background: $box-background;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -18,16 +20,30 @@ code {
     monospace;
 }
 
+input::placeholder {
+  color: #999999;
+}
+
+
 /*
 * app
 */
+.app {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
 .app-header {
   height: 50px;
   line-height: 50px;
   padding: 0 20px;
-  border-bottom: 1px solid #f4f4f4;
+  border-bottom: 1px solid #eeeeee;
   display: flex;
   justify-content: space-between;
+  background: #ffffff;
 }
 
 .app-header-info {
@@ -73,11 +89,61 @@ code {
 */
 .index-page {
   display: flex;
+  h2 {
+    font-size: 15px;
+    margin: 20px 20px 15px;
+    font-weight: bold;
+    color: #777777;
+  }
   .index-page-left {
     flex: 1;
+    .index-page-projects {
+      background: #ffffff;
+      min-height: 130px;
+      margin: 0 20px 20px;
+      padding: 25px;
+    }
+    .index-page-project {
+      width: 230px;
+      height: 240px;
+      border: 1px solid #eee;
+      box-shadow: 0 0 3px #eee;
+    }
+    .index-page-project-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #eeeeee;
+      img {
+        width: 100%;
+        height: 100%;
+        margin: -2px;
+      }
+    }
+    .index-page-project-head {
+      display: flex;
+    }
+    .index-page-project-info {
+      b {
+        font-size: 15px;
+        font-weight: bold;
+        color: #555;
+      }
+      p {
+        font-size: 13px;
+        color: #777777;
+        margin-top: 3px;
+      }
+    }
   }
   .index-page-right {
     width: 350px;
-    border-left: 1px solid #f4f4f4;
+    border-left: 1px solid #eeeeee;
+    .index-page-activites {
+      margin: 0 20px 20px;
+      background: #ffffff;
+      min-height: 130px;
+    }
   }
 }

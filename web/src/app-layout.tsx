@@ -18,21 +18,19 @@ function App(props: any) {
             <p>基于 svg 的图标管理和组件化方案</p>
           </div>
           <div className="app-header-nav">
-            <Link to="/" className="app-header-nav-item">首页</Link>
-            <Link to="/" className="app-header-nav-item active">项目管理</Link>
+            <Link to="/" className="app-header-nav-item active">首页</Link>
+            <Link to="/" className="app-header-nav-item">项目管理</Link>
             <div className="app-header-nav-item">用户管理</div>
             <div className="app-header-nav-item">使用文档</div>
             <div className="app-header-nav-item">Github</div>
             <div className="app-header-nav-item">EN / ZH</div>
           </div>
         </header>
-        <div className="app-page">
-          <Switch>
-            <Route path="/">
-              <IndexPage />
-            </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/">
+            <IndexPage />
+          </Route>
+        </Switch>
       </div>
     </Router>
   );
