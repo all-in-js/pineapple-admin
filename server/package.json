@@ -1,6 +1,13 @@
 {
-  "name": "server",
+  "name": "pineapple-admin-server",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc && node dist"
+  },
+  "dependencies": {
+    "apollo-server-koa": "^2.19.0",
+    "graphql": "^15.4.0"
+  }
 }
