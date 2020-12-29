@@ -1,6 +1,6 @@
 import Koa from 'koa';
 import { ApolloServer, gql } from 'apollo-server-koa';
- 
+
 const typeDefs = gql`
   type Task {
     name: String
@@ -12,7 +12,7 @@ const typeDefs = gql`
     tasks(key: String): [Task]
   }
 `;
- 
+
 const resolvers = {
   Query: {
     hello: () => `({
@@ -29,14 +29,13 @@ const resolvers = {
     }
   }
 };
- 
-const server = new ApolloServer({ typeDefs, resolvers,
-  tracing: true });
- 
+
+const server = new ApolloServer({ typeDefs, resolvers });
+
 const app = new Koa();
 const port = 4000;
 server.applyMiddleware({ app });
- 
+
 app.listen({ port }, () =>
-  console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`),
+  console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
 );

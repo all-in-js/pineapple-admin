@@ -32,8 +32,7 @@ const resolvers = {
         }
     }
 };
-const server = new apollo_server_koa_1.ApolloServer({ typeDefs, resolvers,
-    tracing: true });
+const server = new apollo_server_koa_1.ApolloServer({ typeDefs, resolvers });
 const app = new koa_1.default();
 const port = 4000;
 server.applyMiddleware({ app });
