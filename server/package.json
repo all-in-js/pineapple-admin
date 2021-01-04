@@ -7,6 +7,9 @@
     "dev": "tsc && node dist"
   },
   "dependencies": {
-    "@eryue/injector": "^1.2.3"
+    "@eryue/injector": "^1.2.3",
+    "@types/koa": "^2.11.6",
+    "koa": "^2.13.0",
+    "koa-functions-api": "^1.0.1"
   }
 }

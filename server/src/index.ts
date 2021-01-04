@@ -1,41 +1,22 @@
 import Koa from 'koa';
-import { ApolloServer, gql } from 'apollo-server-koa';
-
-const typeDefs = gql`
-  type Task {
-    name: String
-    time: Int
-  }
-  type Query {
-    hello: String
-    hh: Int
-    tasks(key: String): [Task]
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => `({
-      name: '111'
-    })`,
-    hh: () => 1,
-    tasks(a: any, o: any) {
-      return [
-        {
-          name: o.key,
-          time: 12345
-        }
-      ];
-    }
-  }
-};
-
-const server = new ApolloServer({ typeDefs, resolvers });
+import { functionsApiMiddleware } from 'koa-functions-api';
 
 const app = new Koa();
-const port = 4000;
-server.applyMiddleware({ app });
 
+app.use(functionsApiMiddleware({
+  // path: '/api/functions',
+  // namespace: 'api',
+  functions: [
+    function userList(cx) {
+      return 'okkkk';
+    },
+    function userInfo() {
+      return [12345];
+    }
+  ]
+}));
+
+const port = 4000;
 app.listen({ port }, () =>
-  console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
+  console.log(`🚀 Server ready at http://localhost:${port}/api/functions`)
 );
