@@ -1,18 +1,23 @@
 import Koa from 'koa';
+import bodyparser from 'koa-bodyparser';
 import { functionsApiMiddleware } from 'koa-functions-api';
+import connectDatabase from './utils/connect-db';
+import * as projectFunctions from './functions-api/projects';
 
-const app = new Koa();
+const app = new Koa<{}, KoaContext>();
 
-app.use(functionsApiMiddleware({
+connectDatabase(app);
+
+app.use(bodyparser({
+  formLimit: '100mb',
+  jsonLimit: '100mb'
+}));
+
+app.use(functionsApiMiddleware<IExtendContext>({
   // path: '/api/functions',
   // namespace: 'api',
   functions: [
-    function userList(cx) {
-      return 'okkkk';
-    },
-    function userInfo() {
-      return [12345];
-    }
+    ...Object.values(projectFunctions)
   ]
 }));
 
