@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import IndexPage from './pages/index';
 import LoginPage from './pages/login';
+import ManageProject from './pages/manage-project';
+import ManageUser from './pages/manage-user';
 import Logo from './assets/imgs/pineapple.svg';
 
 const {
@@ -28,9 +30,9 @@ function LayoutFrame(props: any) {
       </div>
       <div className="app-header-nav">
         <Link to="/" className="app-header-nav-item active">首页</Link>
-        <Link to="/login" className="app-header-nav-item">项目管理</Link>
-        <div className="app-header-nav-item">用户管理</div>
-        <div className="app-header-nav-item">使用文档</div>
+        <Link to="/manage-project" className="app-header-nav-item">项目管理</Link>
+        <Link to="/manage-user" className="app-header-nav-item">用户管理</Link>
+        <Link to="/manage-project" className="app-header-nav-item">使用文档</Link>
         <div className="app-header-nav-item">Github</div>
         <div className="app-header-nav-item">EN / ZH</div>
       </div>
@@ -55,6 +57,12 @@ function App(props: any) {
         </Route>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/manage-project">
+          <ManageProject />
+        </Route>
+        <Route path="/manage-user">
+          <ManageUser />
         </Route>
       </Switch>
     </div>

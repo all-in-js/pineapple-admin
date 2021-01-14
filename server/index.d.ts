@@ -1,5 +1,4 @@
 import MongoDB from 'mongodb';
-import Koa from 'koa';
 import { ExtendContext } from 'koa-functions-api';
 
 /**
