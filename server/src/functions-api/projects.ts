@@ -5,7 +5,10 @@ export async function projects(cx: KoaContext) {
   return projects;
 }
 
-export async function project(cx: KoaContext, vars: { id?: string }) {
+type params = {
+  id: string;
+}
+export async function project(cx: KoaContext, vars: params) {
   const { id } = vars;
   if (!id) {
     cx.status = 400;

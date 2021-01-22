@@ -1,5 +1,5 @@
 $primary-color: #feb000 !default;
-$box-background: #fafafa !default;
+$box-background: #f7f7f7 !default;
 
 * {
   margin: 0;
@@ -262,7 +262,7 @@ input::placeholder {
 /*
 * manage-user-page
 */
-.manage-user-page {
+.manage-user-page,.manage-project-page {
   display: flex;
   height: calc(100% - 50px);
   .search-content {
@@ -289,7 +289,6 @@ input::placeholder {
     flex: 1;
     margin-left: 370px;
     height: 100%;
-    overflow: auto;
   }
   .result-head {
     line-height: 65px;
@@ -300,5 +299,10 @@ input::placeholder {
   }
   .result-table {
     background: #fff;
+    th {
+      color: rgb(173, 173, 171);
+      font-weight: bold;
+      background: transparent;
+    }
   }
 }

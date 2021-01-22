@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   Switch,
   Route,
-  Link,
+  NavLink,
   useLocation
 } from "react-router-dom";
 import IndexPage from './pages/index';
@@ -29,10 +29,10 @@ function LayoutFrame(props: any) {
         <p>基于 svg 的图标管理和组件化方案</p>
       </div>
       <div className="app-header-nav">
-        <Link to="/" className="app-header-nav-item active">首页</Link>
-        <Link to="/manage-project" className="app-header-nav-item">项目管理</Link>
-        <Link to="/manage-user" className="app-header-nav-item">用户管理</Link>
-        <Link to="/manage-project" className="app-header-nav-item">使用文档</Link>
+        <NavLink to="/dashboard" className="app-header-nav-item">首页</NavLink>
+        <NavLink to="/manage-project" className="app-header-nav-item">项目管理</NavLink>
+        <NavLink to="/manage-user" className="app-header-nav-item">用户管理</NavLink>
+        <NavLink to="/manage-projhect" className="app-header-nav-item">使用文档</NavLink>
         <div className="app-header-nav-item">Github</div>
         <div className="app-header-nav-item">EN / ZH</div>
       </div>
@@ -52,7 +52,7 @@ function App(props: any) {
     <div className="app">
       <LayoutFrame isLogin={ isLogin } />
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/dashboard">
           <IndexPage />
         </Route>
         <Route path="/login">
