@@ -1,5 +1,6 @@
 
 import md5 from 'md5';
+import { ObjectID } from 'mongodb';
 
 interface NewUserParams {
   username: string;
@@ -44,7 +45,8 @@ export async function addUser(cx: KoaContext, vars: NewUserParams) {
     username,
     password: pwdHash,
     role,
-    using
+    using,
+    createTime: Date.now()
   });
   const {
     code
@@ -57,9 +59,55 @@ export async function addUser(cx: KoaContext, vars: NewUserParams) {
 }
 
 export async function userList(cx: KoaContext) {
-  const data = await cx.$user.find({}).toArray();
+  const data = await cx.$user.find({}).sort({createTime: -1}).toArray();
   return {
     code: cx.codes.SUCCESS.code,
     data
   };
+}
+
+interface DeleteUserParams {
+  id: string;
+}
+export async function deleteUser(cx: KoaContext, vars: DeleteUserParams) {
+  if (!vars.id) {
+    const {
+      code,
+      msg
+    } = cx.codes.INVALID_REQUEST_PARAMS;
+    return {
+      code,
+      msg: `${msg}: 'id' expected.`
+    };
+  }
+  const _id = new ObjectID(vars.id);
+  await cx.$user.deleteOne({_id});
+  await cx.$project.deleteMany({owner: _id});
+  await cx.$svg.deleteMany({owner: _id});
+  return {
+    code: cx.codes.SUCCESS.code,
+    msg: '已删除该用户及其名下相关资源'
+  };
+}
+
+interface UserStatusParams {
+  id: string;
+  newStatus: boolean;
+}
+export async function toggleUserStatus(cx: KoaContext, vars: UserStatusParams) {
+  if (!vars.id || vars.newStatus === undefined) {
+    const {
+      code,
+      msg
+    } = cx.codes.INVALID_REQUEST_PARAMS;
+    return {
+      code,
+      msg: `${msg}: 'id' and 'newStatus' expected.`
+    };
+  }
+  await cx.$user.updateOne({_id: new ObjectID(vars.id)}, {$set: {using: vars.newStatus}});
+  return {
+    code: cx.codes.SUCCESS.code,
+    msg: '用户状态修改成功'
+  }
 }

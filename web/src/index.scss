@@ -51,6 +51,16 @@ input::placeholder {
   cursor: pointer
 }
 
+.nobr {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ant-popover-message-title {
+  max-width: 300px;
+}
+
 /*
 * login
 */
@@ -98,9 +108,10 @@ input::placeholder {
 */
 .app {
   position: fixed;
-  left: 0;
+  left: 50%;
   top: 0;
-  width: 100%;
+  width: 1220px;
+  margin-left: -610px;
   height: 100%;
   overflow: auto;
 }
@@ -265,11 +276,12 @@ input::placeholder {
 .manage-user-page,.manage-project-page {
   display: flex;
   height: calc(100% - 50px);
+  position: relative;
   .search-content {
     width: 350px;
     background: #fff;
-    position: fixed;
-    top: 50px;
+    position: absolute;
+    top: 0;
     bottom: 0;
     left: 0;
     overflow: hidden;
@@ -286,7 +298,7 @@ input::placeholder {
     margin-bottom: 20px;
   }
   .result-content {
-    flex: 1;
+    width: calc(100% - 370px);
     margin-left: 370px;
     height: 100%;
   }
@@ -303,6 +315,15 @@ input::placeholder {
       color: rgb(173, 173, 171);
       font-weight: bold;
       background: transparent;
+      &:nth-last-child(2) {
+        padding-left: 30px;
+      }
+    }
+    .using {
+      color: #1eb51e;
+    }
+    .forbidden {
+      color: #bbbbbb;
     }
   }
 }
