@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Popconfirm, Table, Button, Form, Input, Select, Modal, Switch, Radio, message } from 'antd';
+import { valueType } from 'antd/lib/statistic/utils';
 
 const {
   useState,
@@ -9,6 +10,13 @@ const {
 
 const { Option } = Select;
 
+interface SearchUserParams {
+  username?: string;
+  creator?: string;
+  using?: number | boolean;
+  role?: number | string;
+}
+
 function ManageUser() {
   const defaultForm = {
     username: '',
@@ -16,12 +24,19 @@ function ManageUser() {
     role: 1,
     using: true
   };
+  const defaultSearchParams: SearchUserParams = {
+    username: '',
+    creator: '',
+    role: '',
+    using: -1
+  };
   const winHeight = window.innerHeight;
   const table = useRef<HTMLDivElement>(null);
   const [maxHeight, setMaxHeight] = useState(0);
   const [loadingData, setLoadingData] = useState(false);
   const [userList, setUserList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [searchParams, setSearchParams] = useState<SearchUserParams>(defaultSearchParams);
   const [form] = Form.useForm();
   
   const getUserList = async () => {
@@ -62,6 +77,38 @@ function ManageUser() {
     } else {
       message.error(msg);
     }
+  }
+
+  async function search(defaultParams?: SearchUserParams) {
+    const params = {...(defaultParams || searchParams)};
+    if (!params.role) {
+      params.role = undefined;
+    }
+    if ([0, 1].includes(params.using as number)) {
+      params.using = !!params.using;
+    } else {
+      params.using = undefined;
+    }
+    const { code, msg, data } = await fetch('//localhost:4000/api/functions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        $vars: params,
+        $fns: 'api/userList'
+      })
+    }).then((res) => res.json());
+    if (code === 1000) {
+      setUserList(data);
+    } else {
+      message.error(msg);
+    }
+  }
+
+  async function reset() {
+    setSearchParams(defaultSearchParams);
+    search(defaultSearchParams);
   }
 
   async function confirm(id: any) {
@@ -116,6 +163,30 @@ function ManageUser() {
             checked={checked}
             loading={loading}
             onChange={handleChange} />;
+  }
+
+  const onUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    searchParams.username = e.target.value;
+    setSearchParams({...searchParams});
+  }
+
+  const onCreatorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    searchParams.creator = e.target.value;
+    setSearchParams({...searchParams});
+  }
+
+  const onUsingSelect = (val: valueType) => {
+    if (val === '') {
+      searchParams.using = undefined;
+    } else {
+      searchParams.using = val as number;
+    }
+    setSearchParams({...searchParams});
+  }
+
+  const onRoleChange = (val: valueType) => {
+    searchParams.role = val as number;
+    setSearchParams({...searchParams});
   }
 
   const columns = [
@@ -188,22 +259,46 @@ function ManageUser() {
         <div className="search-head">
           <b>检索条件</b>
           <div>
-            <Button type="text">重置</Button>
-            <Button type="primary">检索</Button>
+            <Button
+              onClick={reset}
+              type="text">重置</Button>
+            <Button
+              onClick={() => search()}
+              type="primary">检索</Button>
           </div>
         </div>
         <div className="search-fields">
         <Form layout="vertical">
           <Form.Item label="用户名">
-            <Input placeholder="请输入用户名" />
+            <Input
+              placeholder="请输入用户名"
+              value={searchParams.username}
+              onChange={onUsernameChange}/>
           </Form.Item>
           <Form.Item label="创建人">
-            <Input placeholder="请输入创建人" />
+            <Input
+              placeholder="请输入创建人"
+              value={searchParams.creator}
+              onChange={onCreatorChange}/>
+          </Form.Item>
+          <Form.Item label="角色">
+            <Select
+              placeholder="请选择"
+              value={searchParams.role}
+              onChange={onRoleChange}>
+              <Option value="">全部</Option>
+              <Option value={1}>管理员</Option>
+              <Option value={2}>用户</Option>
+            </Select>
           </Form.Item>
           <Form.Item label="状态">
-            <Select placeholder="请选择">
-              <Option value="0">启用</Option>
-              <Option value="1">禁用</Option>
+            <Select
+              placeholder="请选择"
+              value={searchParams.using as number}
+              onChange={onUsingSelect}>
+              <Option value={-1}>全部</Option>
+              <Option value={1}>启用</Option>
+              <Option value={0}>禁用</Option>
             </Select>
           </Form.Item>
         </Form>

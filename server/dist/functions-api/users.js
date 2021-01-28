@@ -39,8 +39,22 @@ async function addUser(cx, vars) {
     };
 }
 exports.addUser = addUser;
-async function userList(cx) {
-    const data = await cx.$user.find({}).sort({ createTime: -1 }).toArray();
+async function userList(cx, vars) {
+    const { username, creator, using, role } = vars;
+    const query = {};
+    if (username) {
+        query.username = username;
+    }
+    if (creator) {
+        query.creator = creator;
+    }
+    if (using !== undefined) {
+        query.using = using;
+    }
+    if (role !== undefined) {
+        query.role = role;
+    }
+    const data = await cx.$user.find(query).sort({ createTime: -1 }).toArray();
     return {
         code: cx.codes.SUCCESS.code,
         data

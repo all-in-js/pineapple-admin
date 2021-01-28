@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
   NavLink,
+  Redirect,
   useLocation
 } from "react-router-dom";
 import IndexPage from './pages/index';
@@ -64,6 +65,7 @@ function App(props: any) {
         <Route path="/manage-user">
           <ManageUser />
         </Route>
+        <Redirect to="/dashboard"></Redirect>
       </Switch>
     </div>
   );

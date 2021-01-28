@@ -58,8 +58,34 @@ export async function addUser(cx: KoaContext, vars: NewUserParams) {
   };
 }
 
-export async function userList(cx: KoaContext) {
-  const data = await cx.$user.find({}).sort({createTime: -1}).toArray();
+interface SearchUserParams {
+  username?: string;
+  creator?: string;
+  using?: boolean;
+  role?: number;
+}
+export async function userList(cx: KoaContext, vars: SearchUserParams) {
+  const {
+    username,
+    creator,
+    using,
+    role
+  } = vars;
+  const query: SearchUserParams = {};
+  
+  if(username) {
+    query.username = username;
+  }
+  if (creator) {
+    query.creator = creator;
+  }
+  if (using !== undefined) {
+    query.using = using;
+  }
+  if (role !== undefined) {
+    query.role = role;
+  }
+  const data = await cx.$user.find(query).sort({createTime: -1}).toArray();
   return {
     code: cx.codes.SUCCESS.code,
     data
