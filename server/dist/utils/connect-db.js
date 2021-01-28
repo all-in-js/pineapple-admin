@@ -6,6 +6,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = __importDefault(require("mongodb"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
+var CodesKey;
+(function (CodesKey) {
+    CodesKey["UNKNOW"] = "UNKNOW";
+    CodesKey["SUCCESS"] = "SUCCESS";
+    CodesKey["INNER_ERROR"] = "INNER_ERROR";
+    CodesKey["INVALID_PARAMS_TYPE"] = "INVALID_PARAMS_TYPE";
+    CodesKey["INNERT_ERROR"] = "INNERT_ERROR";
+    CodesKey["DELETE_ERROR"] = "DELETE_ERROR";
+    CodesKey["UPDATE_ERROR"] = "UPDATE_ERROR";
+    CodesKey["QUERY_ERROR"] = "QUERY_ERROR";
+    CodesKey["NOT_FOUND"] = "NOT_FOUND";
+    CodesKey["RESOURCE_REPEAT"] = "RESOURCE_REPEAT";
+    CodesKey["INVALID_REQUEST_PARAMS"] = "INVALID_REQUEST_PARAMS";
+})(CodesKey || (CodesKey = {}));
 function connectDatabase(app) {
     try {
         const { NODE_ENV } = process.env;
@@ -36,61 +50,50 @@ function connectDatabase(app) {
              * 数据级: 20--
              * 业务级：30--
              */
-            const UNKNOW = 'UNKNOW';
-            const SUCCESS = 'SUCCESS';
-            const INNER_ERROR = 'INNER_ERROR';
-            const INVALID_PARAMS_TYPE = 'INVALID_PARAMS_TYPE';
-            const INNERT_ERROR = 'INNERT_ERROR';
-            const DELETE_ERROR = 'DELETE_ERROR';
-            const UPDATE_ERROR = 'UPDATE_ERROR';
-            const QUERY_ERROR = 'QUERY_ERROR';
-            const NOT_FOUND = 'NOT_FOUND';
-            const RESOURCE_REPEAT = 'RESOURCE_REPEAT';
-            const INVALID_REQUEST_PARAMS = 'INVALID_REQUEST_PARAMS';
             app.context.codes = {
-                [SUCCESS]: {
+                [CodesKey.SUCCESS]: {
                     code: 1000,
-                    msg: SUCCESS
+                    msg: CodesKey.SUCCESS
                 },
-                [UNKNOW]: {
+                [CodesKey.UNKNOW]: {
                     code: 1001,
-                    msg: UNKNOW
+                    msg: CodesKey.UNKNOW
                 },
-                [INNER_ERROR]: {
+                [CodesKey.INNER_ERROR]: {
                     code: 1002,
-                    msg: INNER_ERROR
+                    msg: CodesKey.INNER_ERROR
                 },
-                [INVALID_PARAMS_TYPE]: {
+                [CodesKey.INVALID_PARAMS_TYPE]: {
                     code: 2001,
-                    msg: INVALID_PARAMS_TYPE
+                    msg: CodesKey.INVALID_PARAMS_TYPE
                 },
-                [INNERT_ERROR]: {
+                [CodesKey.INNERT_ERROR]: {
                     code: 2002,
-                    msg: INNERT_ERROR
+                    msg: CodesKey.INNERT_ERROR
                 },
-                [DELETE_ERROR]: {
+                [CodesKey.DELETE_ERROR]: {
                     code: 2003,
-                    msg: DELETE_ERROR
+                    msg: CodesKey.DELETE_ERROR
                 },
-                [UPDATE_ERROR]: {
+                [CodesKey.UPDATE_ERROR]: {
                     code: 2004,
-                    msg: UPDATE_ERROR
+                    msg: CodesKey.UPDATE_ERROR
                 },
-                [QUERY_ERROR]: {
+                [CodesKey.QUERY_ERROR]: {
                     code: 2005,
-                    msg: QUERY_ERROR
+                    msg: CodesKey.QUERY_ERROR
                 },
-                [NOT_FOUND]: {
+                [CodesKey.NOT_FOUND]: {
                     code: 2006,
-                    msg: NOT_FOUND
+                    msg: CodesKey.NOT_FOUND
                 },
-                [RESOURCE_REPEAT]: {
+                [CodesKey.RESOURCE_REPEAT]: {
                     code: 2007,
-                    msg: RESOURCE_REPEAT
+                    msg: CodesKey.RESOURCE_REPEAT
                 },
-                [INVALID_REQUEST_PARAMS]: {
+                [CodesKey.INVALID_REQUEST_PARAMS]: {
                     code: 3001,
-                    msg: INVALID_REQUEST_PARAMS
+                    msg: CodesKey.INVALID_REQUEST_PARAMS
                 }
             };
         })();

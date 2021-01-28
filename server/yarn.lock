@@ -891,10 +891,10 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
-koa-functions-api@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/koa-functions-api/-/koa-functions-api-1.0.6.tgz#fe658726382a55cef5cec3790966a1db8215ef66"
-  integrity sha512-pIfUJB9Eoz2RO1ENR7XIre/4u1aOB4u7yyiPye4lnS6Tj0BqrP/LQvvwjdTmaMOF2lIbmTghFQfhwC3IRwt/TA==
+koa-functions-api@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/koa-functions-api/-/koa-functions-api-1.0.7.tgz#5e91bb473bf9edceb8f7c09e9db68f0fb0ebae44"
+  integrity sha512-Vc5o5FDUwfGz5ID8UIg+LEvm+ZoTk/zynHgnSV5OhSajsgbtYhnlVBVeV3OOmlTMgOpTT2w2kCAh8QQ9YPpDtg==
   dependencies:
     "@eryue/injector" "^1.2.3"
     "@iuv-tools/utils" "^1.0.0-beta.2"

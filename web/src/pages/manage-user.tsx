@@ -72,7 +72,7 @@ function ManageUser() {
     }).then((res) => res.json());
     if (code === 1000) {
       message.success(msg);
-      setShowModal(false);
+      closeModal();
       getUserList();
     } else {
       message.error(msg);
@@ -109,6 +109,11 @@ function ManageUser() {
   async function reset() {
     setSearchParams(defaultSearchParams);
     search(defaultSearchParams);
+  }
+
+  async function closeModal() {
+    form.resetFields();
+    setShowModal(false);
   }
 
   async function confirm(id: any) {
@@ -158,6 +163,7 @@ function ManageUser() {
       }
     }
     return <Switch
+            size="small"
             checkedChildren="启用"
             unCheckedChildren="禁用"
             checked={checked}
@@ -325,7 +331,7 @@ function ManageUser() {
         destroyOnClose={true}
         visible={showModal}
         onOk={submit}
-        onCancel={() => setShowModal(false)}
+        onCancel={closeModal}
         title="新建用户">
         <Form
           initialValues={defaultForm}

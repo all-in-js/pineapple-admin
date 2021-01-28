@@ -18,7 +18,7 @@ async function addUser(cx, vars) {
     const userInfo = await cx.$user.findOne({ username });
     if (userInfo) {
         const { code, msg } = cx.codes.RESOURCE_REPEAT;
-        return cx.body = {
+        return {
             code,
             msg: `${msg}: 用户名重复`
         };
@@ -29,7 +29,8 @@ async function addUser(cx, vars) {
         password: pwdHash,
         role,
         using,
-        createTime: Date.now()
+        createTime: Date.now(),
+        creator: ''
     });
     const { code } = cx.codes.SUCCESS;
     return {

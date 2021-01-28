@@ -1,17 +1,12 @@
 import MongoDB from 'mongodb';
 import { ExtendContext } from 'koa-functions-api';
+import { IcodesMap } from './src/utils/connect-db';
 
 /**
  * 扩展context
  */
 declare global {
-  interface IcodeItem {
-    code: number;
-    msg: string;
-  }
-  interface IcodesMap {
-    [key: string]: IcodeItem;
-  }
+  
   interface IExtendContext {
     $collection: (col: string) => MongoDB.Collection;
     $project: MongoDB.Collection;

@@ -278,7 +278,7 @@ input::placeholder {
   height: calc(100% - 50px);
   position: relative;
   .search-content {
-    width: 350px;
+    width: 280px;
     background: #fff;
     position: absolute;
     top: 0;
@@ -298,8 +298,8 @@ input::placeholder {
     margin-bottom: 20px;
   }
   .result-content {
-    width: calc(100% - 370px);
-    margin-left: 370px;
+    width: calc(100% - 300px);
+    margin-left: 300px;
     height: 100%;
   }
   .result-head {

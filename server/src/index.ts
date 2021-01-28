@@ -23,7 +23,18 @@ app.use(functionsApiMiddleware<IExtendContext>({
   functions: [
     ...Object.values(projectFunctions),
     ...Object.values(userFunctions)
-  ]
+  ],
+  errorHandler(cx, err) {
+    console.log(err);
+    const {
+      code,
+      msg
+    } = cx.codes.INNER_ERROR;
+    cx.body = {
+      code,
+      msg: `${msg}: ${err.message}`
+    };
+  }
 }));
 
 const port = 4000;

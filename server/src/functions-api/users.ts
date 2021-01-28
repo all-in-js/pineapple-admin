@@ -34,7 +34,7 @@ export async function addUser(cx: KoaContext, vars: NewUserParams) {
       code,
       msg
     } = cx.codes.RESOURCE_REPEAT;
-    return cx.body = {
+    return {
       code,
       msg: `${msg}: 用户名重复` 
     };
@@ -46,11 +46,14 @@ export async function addUser(cx: KoaContext, vars: NewUserParams) {
     password: pwdHash,
     role,
     using,
-    createTime: Date.now()
+    createTime: Date.now(),
+    creator: ''
   });
+
   const {
     code
   } = cx.codes.SUCCESS;
+
   return {
     code,
     msg: '用户新建成功',
@@ -72,7 +75,7 @@ export async function userList(cx: KoaContext, vars: SearchUserParams) {
     role
   } = vars;
   const query: SearchUserParams = {};
-  
+
   if(username) {
     query.username = username;
   }
@@ -85,7 +88,9 @@ export async function userList(cx: KoaContext, vars: SearchUserParams) {
   if (role !== undefined) {
     query.role = role;
   }
+
   const data = await cx.$user.find(query).sort({createTime: -1}).toArray();
+  
   return {
     code: cx.codes.SUCCESS.code,
     data

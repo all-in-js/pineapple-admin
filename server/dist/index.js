@@ -30,7 +30,15 @@ app.use(koa_functions_api_1.functionsApiMiddleware({
     functions: [
         ...Object.values(projectFunctions),
         ...Object.values(userFunctions)
-    ]
+    ],
+    errorHandler(cx, err) {
+        console.log(err);
+        const { code, msg } = cx.codes.INNER_ERROR;
+        cx.body = {
+            code,
+            msg: `${msg}: ${err.message}`
+        };
+    }
 }));
 const port = 4000;
 app.listen({ port }, () => console.log(`🚀 Server ready at http://localhost:${port}/api/functions`));
