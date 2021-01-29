@@ -101,6 +101,8 @@ export async function addProject(cx: KoaContext, vars: ProjectParams) {
     alias,
     mark,
     using,
+    totalIcons: 0,
+    totalMembers: [],
     createTime: Date.now(),
     creator: ''
   });

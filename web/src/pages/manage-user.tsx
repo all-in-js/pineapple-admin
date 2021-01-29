@@ -41,7 +41,7 @@ function ManageUser() {
   
   const getUserList = async () => {
     setLoadingData(true);
-    const { code, msg, data } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg, data } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ function ManageUser() {
 
   const submit = async () => {
     const values = await form.validateFields();
-    const { code, msg } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ function ManageUser() {
     } else {
       params.using = undefined;
     }
-    const { code, msg, data } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg, data } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ function ManageUser() {
   }
 
   async function confirm(id: any) {
-    const { code, msg } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -142,7 +142,7 @@ function ManageUser() {
     const [checked, setChecked] = useState(!row.using);
     const handleChange = async () => {
       setLoading(true);
-      const { code, msg } = await fetch('//localhost:4000/api/functions', {
+      const { code, msg } = await fetch('/api/functions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -312,7 +312,7 @@ function ManageUser() {
       </div>
       <div className="result-content">
         <div className="result-head">
-          <span>检索结果：共5条</span>
+          <span>检索结果：共{userList.length}条</span>
           <Button
             onClick={() => setShowModal(true)}
             type="primary">新建用户</Button>

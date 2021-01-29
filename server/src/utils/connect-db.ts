@@ -31,7 +31,12 @@ export default function connectDatabase(app: Koa<{}, KoaContext>) {
     const dbConfigPath = path.resolve(process.cwd(), `.${NODE_ENV}.env`);
     const env = Dotenv.config({ path: dbConfigPath }).parsed || {};
     (async () => {
-      const mongoClient = await MongoDB.MongoClient.connect(`mongodb://${env.DB_HOST}:${env.DB_PORT}/${env.DB_DATABASE}`);
+      const mongoClient = await MongoDB.MongoClient.connect(`mongodb://${env.DB_HOST}:${env.DB_PORT}/${env.DB_DATABASE}`, {
+        useUnifiedTopology: true
+      });
+      mongoClient.on('error', (err) => {
+        throw err;
+      });
       const $collection = (col: string) => {
         return mongoClient.db(env.DB_DATABASE).collection(col);
       }

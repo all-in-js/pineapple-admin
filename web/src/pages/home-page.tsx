@@ -1,4 +1,7 @@
 import * as React from 'react';
+import {
+  Link
+} from "react-router-dom";
 import { Table, Button, Form, Input, Select, Modal, Switch, Popconfirm, message } from 'antd';
 import { valueType } from 'antd/lib/statistic/utils';
 
@@ -38,7 +41,7 @@ const defaultSearchParams: SearchProjectParams = {
   using: -1
 };
 
-function ManageProject() {
+function HomePage() {
   const winHeight = window.innerHeight;
   const table = useRef<HTMLDivElement>(null);
   const [showModal, setShowModal] = useState(false);
@@ -61,7 +64,7 @@ function ManageProject() {
     const [checked, setChecked] = useState(!row.using);
     const handleChange = async () => {
       setLoading(true);
-      const { code, msg } = await fetch('//localhost:4000/api/functions', {
+      const { code, msg } = await fetch('/api/functions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -91,7 +94,7 @@ function ManageProject() {
   }
 
   async function confirm(alias: string) {
-    const { code, msg } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -115,7 +118,10 @@ function ManageProject() {
     {
       title: '项目名称',
       dataIndex: 'name',
-      width: 150
+      width: 150,
+      render(val: string, row: any) {
+        return <Link to={`/icons/${row._id}`}>{ val }</Link>
+      }
     },
     {
       title: '简称(alias)',
@@ -123,9 +129,20 @@ function ManageProject() {
       width: 120
     },
     {
-      title: '创建人',
-      dataIndex: 'creator',
-      width: 120
+      title: '图标数',
+      dataIndex: 'totalIcons',
+      width: 80,
+      render(val: number) {
+        return <div className="num-style">{val || 0}</div>;
+      }
+    },
+    {
+      title: '成员数',
+      dataIndex: 'totalMembers',
+      width: 80,
+      render(val: string[]) {
+        return <div className="num-style">{val.length}</div>;
+      }
     },
     {
       title: '备注',
@@ -164,7 +181,7 @@ function ManageProject() {
 
   async function getProjects() {
     setLoadingData(true);
-    const { code, msg, data } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg, data } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -183,7 +200,7 @@ function ManageProject() {
 
   async function submit() {
     const values = await form.validateFields();
-    const { code, msg } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -230,7 +247,7 @@ function ManageProject() {
       params.using = undefined;
     }
     
-    const { code, msg, data } = await fetch('//localhost:4000/api/functions', {
+    const { code, msg, data } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -282,12 +299,6 @@ function ManageProject() {
               value={searchParams.alias}
               onChange={onAliasChange} />
           </Form.Item>
-          <Form.Item label="创建人">
-            <Input
-              placeholder="请输入创建人"
-              value={searchParams.creator}
-              onChange={onCreatorChange} />
-          </Form.Item>
           <Form.Item label="状态">
             <Select
               placeholder="请选择"
@@ -303,7 +314,7 @@ function ManageProject() {
       </div>
       <div className="result-content">
         <div className="result-head">
-          <span>检索结果：共5条</span>
+          <span>检索结果：共{projects.length}条</span>
           <Button
             onClick={() => setShowModal(true)}
             type="primary">新建项目</Button>
@@ -366,4 +377,4 @@ function ManageProject() {
   );
 }
 
-export default ManageProject;
+export default HomePage;

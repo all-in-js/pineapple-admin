@@ -6,9 +6,9 @@ import {
   Redirect,
   useLocation
 } from "react-router-dom";
-import IndexPage from './pages/index';
 import LoginPage from './pages/login';
-import ManageProject from './pages/manage-project';
+import HomePage from './pages/home-page';
+import IconsPage from './pages/icons-page';
 import ManageUser from './pages/manage-user';
 import Logo from './assets/imgs/pineapple.svg';
 
@@ -30,8 +30,7 @@ function LayoutFrame(props: any) {
         <p>基于 svg 的图标管理和组件化方案</p>
       </div>
       <div className="app-header-nav">
-        <NavLink to="/dashboard" className="app-header-nav-item">首页</NavLink>
-        <NavLink to="/manage-project" className="app-header-nav-item">项目管理</NavLink>
+        <NavLink exact  to="/" className="app-header-nav-item">图标管理</NavLink>
         <NavLink to="/manage-user" className="app-header-nav-item">用户管理</NavLink>
         <NavLink to="/manage-projhect" className="app-header-nav-item">使用文档</NavLink>
         <div className="app-header-nav-item">Github</div>
@@ -53,19 +52,19 @@ function App(props: any) {
     <div className="app">
       <LayoutFrame isLogin={ isLogin } />
       <Switch>
-        <Route exact path="/dashboard">
-          <IndexPage />
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="/icons/:id">
+          <IconsPage />
         </Route>
         <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="/manage-project">
-          <ManageProject />
-        </Route>
         <Route path="/manage-user">
           <ManageUser />
         </Route>
-        <Redirect to="/dashboard"></Redirect>
+        <Redirect to="/"></Redirect>
       </Switch>
     </div>
   );

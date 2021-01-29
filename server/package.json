@@ -10,6 +10,7 @@
   "dependencies": {
     "@eryue/injector": "^1.2.3",
     "@koa/cors": "^3.1.0",
+    "@types/fs-extra": "^9.0.6",
     "@types/koa": "^2.11.6",
     "@types/koa-bodyparser": "^4.3.0",
     "@types/koa__cors": "^3.0.2",
@@ -17,6 +18,7 @@
     "@types/mongodb": "^3.6.3",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
+    "fs-extra": "^9.1.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-functions-api": "^1.0.7",

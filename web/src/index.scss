@@ -1,4 +1,4 @@
-$primary-color: #feb000 !default;
+$primary-color: #1890ff !default;
 $box-background: #f7f7f7 !default;
 
 * {
@@ -61,6 +61,17 @@ input::placeholder {
   max-width: 300px;
 }
 
+.ant-dropdown-menu-item {
+  color: #666666;
+  .iconfont {
+    margin-right: 3px;
+  }
+}
+
+.num-style {
+  text-align: center;
+}
+
 /*
 * login
 */
@@ -107,6 +118,7 @@ input::placeholder {
 * app
 */
 .app {
+  background: #ffffff;
   position: fixed;
   left: 50%;
   top: 0;
@@ -156,116 +168,14 @@ input::placeholder {
     margin-left: 30px;
     position: relative;
     text-decoration: none;
-    color: #444444;
+    color: hsl(0, 0%, 27%);
     transition: all .35s;
     &:hover {
       color: $primary-color;
     }
-    &.active {
+    &.active[aria-current="page"] {
       color: $primary-color;
       font-weight: bold;
-    }
-  }
-}
-
-/*
-* index-page
-*/
-.index-page {
-  display: flex;
-  h2 {
-    font-size: 15px;
-    margin: 20px 20px 15px;
-    font-weight: bold;
-    color: #777777;
-  }
-  .left {
-    flex: 1;
-    .projects {
-      background: #ffffff;
-      min-height: 130px;
-      margin: 0 20px 20px;
-      padding: 25px;
-    }
-    .project {
-      width: 230px;
-      border: 1px solid #eee;
-      box-shadow: 0 0 3px #eee;
-    }
-    .project-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-      background: #eeeeee;
-      img {
-        width: 100%;
-        height: 100%;
-        margin: -2px;
-      }
-    }
-    .project-head {
-      display: flex;
-      padding: 15px;
-      padding-right: 0;
-    }
-    .project-footer {
-      border-top: 1px solid #eee;
-      margin-top: 30px;
-      line-height: 42px;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 15px;
-      color: #666666;
-      font-size: 14px;
-      .icon-zan {
-        margin: 3px;
-      }
-      .icon-moreif {
-        width: 45px;
-        text-align: center;
-        margin-right: -15px;
-      }
-    }
-    .project-info {
-      flex: 1;
-      margin-left: 10px;
-      b {
-        font-size: 15px;
-        font-weight: bold;
-        color: #555;
-      }
-      p {
-        font-size: 13px;
-        color: #777777;
-        margin-top: 3px;
-      }
-    }
-    .project-count {
-      display: flex;
-      justify-content: space-evenly;
-      margin: 13px 0;
-      .count-block {
-        text-align: center;
-        p:first-child {
-          font-size: 14px;
-          color: #777777;
-          margin-bottom: 6px;
-        }
-        b {
-          font-size: 20px;
-          margin-top: 10px;
-        }
-      }
-    }
-  }
-  .right {
-    width: 350px;
-    border-left: 1px solid #eeeeee;
-    .activites {
-      margin: 0 20px 20px;
-      background: #ffffff;
-      min-height: 130px;
     }
   }
 }
@@ -324,6 +234,54 @@ input::placeholder {
     }
     .forbidden {
       color: #bbbbbb;
+    }
+  }
+}
+
+/* icons-page */
+.icons-page {
+  .head {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px;
+    line-height: 60px;
+    .icons-info {
+      strong {
+        font-size: 15px;
+        margin-right: 5px;
+      }
+      small {
+        color: #999;
+      }
+    }
+    .page-back {
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 4px;
+      margin-right: 15px;
+      vertical-align: bottom;
+      transition: all .35s;
+      cursor: pointer;
+      &:hover {
+        background: #f4f4f4;
+      }
+    }
+    .icons-ctrls {
+      display: flex;
+      align-items: center;
+      button {
+        margin-left: 15px;
+      }
+    }
+  }
+  .content {
+    display: flex;
+  }
+  .icons-download,.icons-upload {
+    display: flex;
+    align-items: center;
+    span {
+      margin: 0 3px;
     }
   }
 }

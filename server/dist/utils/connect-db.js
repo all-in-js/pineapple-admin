@@ -26,7 +26,12 @@ function connectDatabase(app) {
         const dbConfigPath = path_1.default.resolve(process.cwd(), `.${NODE_ENV}.env`);
         const env = dotenv_1.default.config({ path: dbConfigPath }).parsed || {};
         (async () => {
-            const mongoClient = await mongodb_1.default.MongoClient.connect(`mongodb://${env.DB_HOST}:${env.DB_PORT}/${env.DB_DATABASE}`);
+            const mongoClient = await mongodb_1.default.MongoClient.connect(`mongodb://${env.DB_HOST}:${env.DB_PORT}/${env.DB_DATABASE}`, {
+                useUnifiedTopology: true
+            });
+            mongoClient.on('error', (err) => {
+                throw err;
+            });
             const $collection = (col) => {
                 return mongoClient.db(env.DB_DATABASE).collection(col);
             };

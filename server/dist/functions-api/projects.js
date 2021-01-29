@@ -65,6 +65,8 @@ async function addProject(cx, vars) {
         alias,
         mark,
         using,
+        totalIcons: 0,
+        totalMembers: [],
         createTime: Date.now(),
         creator: ''
     });

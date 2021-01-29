@@ -2,8 +2,8 @@ import * as React from 'react';
 import classnames from 'classnames';
 
 export default (props: any) => {
-  const { color, size, name } = props;
-  const iconClas = classnames('iconfont', name);
+  const { color, size, name, className } = props;
+  const iconClas = classnames('iconfont', name, className);
   const iconStyle: {
     color?: string;
     fontSize?: string;
