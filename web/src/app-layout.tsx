@@ -30,7 +30,7 @@ function LayoutFrame(props: any) {
         <p>基于 svg 的图标管理和组件化方案</p>
       </div>
       <div className="app-header-nav">
-        <NavLink exact  to="/" className="app-header-nav-item">图标管理</NavLink>
+        <NavLink exact to="/" className="app-header-nav-item">图标管理</NavLink>
         <NavLink to="/manage-user" className="app-header-nav-item">用户管理</NavLink>
         <NavLink to="/manage-projhect" className="app-header-nav-item">使用文档</NavLink>
         <div className="app-header-nav-item">Github</div>

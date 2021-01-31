@@ -17,6 +17,7 @@ const koa_functions_api_1 = require("koa-functions-api");
 const connect_db_1 = __importDefault(require("./utils/connect-db"));
 const projectFunctions = __importStar(require("./functions-api/projects"));
 const userFunctions = __importStar(require("./functions-api/users"));
+const svgFunctions = __importStar(require("./functions-api/svgs"));
 const app = new koa_1.default();
 connect_db_1.default(app);
 app.use(cors_1.default());
@@ -29,7 +30,8 @@ app.use(koa_functions_api_1.functionsApiMiddleware({
     // namespace: 'api',
     functions: [
         ...Object.values(projectFunctions),
-        ...Object.values(userFunctions)
+        ...Object.values(userFunctions),
+        ...Object.values(svgFunctions)
     ],
     errorHandler(cx, err) {
         console.log(err);

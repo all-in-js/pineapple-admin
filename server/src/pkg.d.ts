@@ -1,0 +1,1 @@
+declare module '@open-fe/svg-icons/scripts/svgo';

@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Button, Dropdown, Menu } from 'antd';
 import IconFont from '../components/icon-font';
 
-function IconsPage() {
+function IconsPage(props: any) {
   const menu = (
     <Menu>
       <Menu.Item key="1">
@@ -18,6 +19,7 @@ function IconsPage() {
       <div className="head">
         <div className="icons-info">
           <IconFont
+            onClick={() => props.history.goBack()}
             className="page-back"
             size="18px"
             name="icon-back" />
@@ -52,4 +54,4 @@ function IconsPage() {
   );
 }
 
-export default IconsPage;
+export default withRouter(IconsPage);

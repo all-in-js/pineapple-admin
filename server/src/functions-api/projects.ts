@@ -1,5 +1,15 @@
 import { ObjectID } from 'mongodb';
 
+/**
+ * 项目列表，默认返回所有项目
+ * 1. 检索条件
+ * {
+ *  name: 项目名称
+ *  alias: 项目简称
+ *  creator: 创建者
+ *  using: 是否启用
+ * }
+ */
 interface SearchProjectParams {
   name?: string;
   alias?: string;
@@ -40,6 +50,12 @@ export async function projects(cx: KoaContext, vars: SearchProjectParams) {
   };
 }
 
+/**
+ * 项目详情
+ * {
+ *  id: 项目id
+ * }
+ */
 type params = {
   id: string;
 }
@@ -59,6 +75,15 @@ export async function project(cx: KoaContext, vars: params) {
   return project;
 }
 
+/**
+ * 新建图标项目
+ * {
+ *  name: 项目名称
+ *  alias: 项目简称
+ *  mark: 备注
+ *  using: 是否启用
+ * }
+ */
 interface ProjectParams {
   name?: string;
   alias?: string;
@@ -114,6 +139,12 @@ export async function addProject(cx: KoaContext, vars: ProjectParams) {
   }
 }
 
+/**
+ * 删除项目，同时会删除关联的所有图标
+ * {
+ *  alias: 项目简称
+ * }
+ */
 interface DeleteProjectParams {
   alias?: string;
 }
@@ -138,6 +169,13 @@ export async function deleteProject(cx: KoaContext, vars: DeleteProjectParams) {
   }
 }
 
+/**
+ * 切换项目状态
+ * {
+ *  id: 项目id
+ *  newStatus: 新的项目状态
+ * }
+ */
 interface ToggleProejctStatusParams {
   id?: string;
   newStatus?: boolean;

@@ -16,6 +16,7 @@ export default (props: any) => {
   }
   return (
     <i
+      onClick={props.onClick}
       style={ iconStyle }
       className={ iconClas }>
     </i>
