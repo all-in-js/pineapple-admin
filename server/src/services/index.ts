@@ -30,3 +30,11 @@ export default class Upload extends IncomingForm {
     });
   }
 }
+
+app.use(koaUpload({
+  uri: 'api/upload',
+  formidable: {},
+  response(cx, result) {
+
+  }
+}))

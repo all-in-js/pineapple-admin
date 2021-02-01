@@ -11,7 +11,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const koa_1 = __importDefault(require("koa"));
-const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
+const koa_body_1 = __importDefault(require("koa-body"));
 const cors_1 = __importDefault(require("@koa/cors"));
 const koa_functions_api_1 = require("koa-functions-api");
 const connect_db_1 = __importDefault(require("./utils/connect-db"));
@@ -21,10 +21,7 @@ const svgFunctions = __importStar(require("./functions-api/svgs"));
 const app = new koa_1.default();
 connect_db_1.default(app);
 app.use(cors_1.default());
-app.use(koa_bodyparser_1.default({
-    formLimit: '100mb',
-    jsonLimit: '100mb'
-}));
+app.use(koa_body_1.default());
 app.use(koa_functions_api_1.functionsApiMiddleware({
     // path: '/api/functions',
     // namespace: 'api',

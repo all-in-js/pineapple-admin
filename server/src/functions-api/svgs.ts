@@ -15,7 +15,7 @@ interface UploadParams {
   alias?: string;
   name?: string;
 }
-export async function upload(cx: KoaContext, vars: UploadParams) {
+export async function uploadSvg(cx: KoaContext, vars: UploadParams) {
   const { alias, name } = vars;
   if (!alias || !name) {
     const {

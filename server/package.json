@@ -26,6 +26,7 @@
     "koa-bodyparser": "^4.3.0",
     "koa-functions-api": "^1.0.7",
     "md5": "^2.3.0",
-    "mongodb": "^3.6.3"
+    "mongodb": "^3.6.3",
+    "node-upload-api": "^1.0.2"
   }
 }

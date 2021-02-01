@@ -4,7 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_extra_1 = __importDefault(require("fs-extra"));
-async function upload(cx, vars) {
+const svgo_1 = __importDefault(require("@open-fe/svg-icons/scripts/svgo"));
+const services_1 = __importDefault(require("../services"));
+const svgo = new svgo_1.default();
+async function uploadSvg(cx, vars) {
     const { alias, name } = vars;
     if (!alias || !name) {
         const { code, msg } = cx.codes.INVALID_REQUEST_PARAMS;
@@ -13,12 +16,23 @@ async function upload(cx, vars) {
             msg: `${msg}: 'alias' and 'name' expected.`
         };
     }
-    const file = cx.request.files.svg;
+    const uploadService = new services_1.default({
+        keepExtensions: true,
+        key: 'svg'
+    });
+    const { err, file } = await uploadService.transform(cx.req);
+    if (err) {
+        const { code, msg } = cx.codes.INNER_ERROR;
+        return {
+            code,
+            msg: `${msg}: ${err.message}`
+        };
+    }
     if (!file) {
         const { code, msg } = cx.codes.NOT_FOUND;
         return {
             code,
-            msg: `${msg}: 未接收到上传的文件`
+            msg: `${msg}: 未接收到文件`
         };
     }
     /**
@@ -50,9 +64,7 @@ async function upload(cx, vars) {
      * svgo optimize
      */
     // TODO: import svgo
-    const svgInfo = {
-        name: ''
-    }; // await svgo.build(name, svgContent);
+    const svgInfo = await svgo.build(name, svgContent);
     /**
      * save
      */
@@ -78,4 +90,4 @@ async function upload(cx, vars) {
         msg: '上传成功'
     };
 }
-exports.upload = upload;
+exports.uploadSvg = uploadSvg;

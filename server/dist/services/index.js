@@ -1,33 +1,35 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const formidable_1 = __importDefault(require("formidable"));
-class Upload extends formidable_1.default {
+const formidable_1 = require("formidable");
+class Upload extends formidable_1.IncomingForm {
     constructor(options) {
         super(options);
         this.key = options.key;
     }
     transform(req) {
         return new Promise((rs, rj) => {
+            let res = {};
             try {
                 this.parse(req, (err, fields, files) => {
-                    if (err) {
-                        rj(err);
-                    }
-                    else {
-                        rs({
-                            files: files[this.key],
-                            fields
-                        });
-                    }
+                    res = {
+                        err,
+                        file: files[this.key]
+                    };
                 });
             }
-            catch (e) {
-                rj(e);
+            catch (err) {
+                res = {
+                    err
+                };
             }
+            rs(res);
         });
     }
 }
 exports.default = Upload;
+app.use(koaUpload({
+    uri: 'api/upload',
+    formidable: {},
+    response(cx, result) {
+    }
+}));

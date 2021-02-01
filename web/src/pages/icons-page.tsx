@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button, Dropdown, Menu } from 'antd';
+import { Button, Dropdown, Menu, Upload } from 'antd';
 import IconFont from '../components/icon-font';
 
 function IconsPage(props: any) {
@@ -14,6 +14,20 @@ function IconsPage(props: any) {
       </Menu.Item>
     </Menu>
   );
+  const handleUpload = (info: any) => {
+    const fd = new FormData();
+    fd.append('svg', info.file);
+    fd.append('$fns', 'api/uploadSvg');
+    fd.append('$vars', JSON.stringify({
+      alias: 'ssasa',
+      name: 'sasssssss'
+    }));
+    fd.append('alias', 'ssasa');
+    fetch('/api/functions', {
+      method: 'POST',
+      body: fd
+    });
+  }
   return (
     <div className="icons-page">
       <div className="head">
@@ -27,12 +41,17 @@ function IconsPage(props: any) {
           <small>cbg-icns</small>
         </div>
         <div className="icons-ctrls">
-          <Button
-            className="icons-upload"
-            type="primary">
-            <IconFont size="20px" name="icon-up-load" />
-            上传图标
-          </Button>
+          <Upload
+            name="svg"
+            accept="svg"
+            customRequest={handleUpload}>
+            <Button
+              className="icons-upload"
+              type="primary">
+              <IconFont size="20px" name="icon-up-load" />
+              上传图标
+            </Button>
+          </Upload>
           <Dropdown overlay={menu}>
             <Button className="icons-download">
               <IconFont size="20px" name="icon-Clouddownload-Outlined" />

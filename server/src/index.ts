@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import bodyparser from 'koa-bodyparser';
 import cors from '@koa/cors';
+import uploadApi from 'node-upload-api';
 import { functionsApiMiddleware } from 'koa-functions-api';
 import connectDatabase from './utils/connect-db';
 import * as projectFunctions from './functions-api/projects';
@@ -13,9 +14,14 @@ connectDatabase(app);
 
 app.use(cors());
 
-app.use(bodyparser({
-  formLimit: '100mb',
-  jsonLimit: '100mb'
+app.use(bodyparser());
+
+app.use(uploadApi<KoaContext>({
+  uri: '/v1/upload',
+  keepExtensions: true,
+  response(cx, result) {
+    cx.body = result;
+  }
 }));
 
 app.use(functionsApiMiddleware<IExtendContext>({
