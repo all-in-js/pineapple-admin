@@ -14,8 +14,9 @@ app.use(cors());
 
 app.use(bodyparser());
 
+// TODO: PARAMS VALIDATE
 app.use(uploadApi<KoaContext>({
-  uri: '/v1/upload',
+  uri: '/api/v1/upload',
   keepExtensions: true,
   response(cx, result) {
     cx.body = result;
