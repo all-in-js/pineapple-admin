@@ -1,16 +1,14 @@
 import Koa from 'koa';
-import bodyparser from 'koa-bodyparser';
 import cors from '@koa/cors';
+import bodyparser from 'koa-bodyparser';
 import uploadApi from 'node-upload-api';
 import { functionsApiMiddleware } from 'koa-functions-api';
-import connectDatabase from './utils/connect-db';
+import init from './init';
 import * as projectFunctions from './functions-api/projects';
 import * as userFunctions from './functions-api/users';
 import * as svgFunctions from './functions-api/svgs';
 
 const app = new Koa<{}, KoaContext>();
-
-connectDatabase(app);
 
 app.use(cors());
 
@@ -46,6 +44,16 @@ app.use(functionsApiMiddleware<IExtendContext>({
 }));
 
 const port = 4000;
-app.listen({ port }, () =>
-  console.log(`🚀 Server ready at http://localhost:${port}/api/functions`)
-);
+
+/**
+ * 初始化应用
+ */
+init(app).then(() => {
+  app.listen({ port }, () =>
+    console.log(`🚀 Server ready at http://localhost:${port}/api/functions`)
+  );
+}).catch(e => {
+  console.log(e);
+  process.exit();
+});
+

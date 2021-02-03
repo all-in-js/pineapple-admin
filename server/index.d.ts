@@ -1,6 +1,7 @@
+import Koa from 'koa';
 import MongoDB from 'mongodb';
 import { ExtendContext } from 'koa-functions-api';
-import { IcodesMap } from './src/utils/connect-db';
+import { IcodesMap } from './src/init/init-codes';
 
 /**
  * 扩展context
@@ -15,4 +16,5 @@ declare global {
     codes: IcodesMap;
   }
   type KoaContext = ExtendContext<IExtendContext>;
+  type App = Koa<{}, KoaContext>;
 }
