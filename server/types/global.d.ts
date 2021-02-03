@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import MongoDB from 'mongodb';
 import { ExtendContext } from 'koa-functions-api';
-import { IcodesMap } from './src/init/init-codes';
+import { IcodesMap } from '../src/init/init-codes';
 
 /**
  * 扩展context
