@@ -17,7 +17,7 @@ function IconsPage(props: any) {
   const handleUpload = (info: any) => {
     const fd = new FormData();
     fd.append('svg', info.file);
-    fd.append('alias', 'alias');
+    fd.append('alias', 'xcccx');
     fd.append('name', 'sasssssss');
     fetch('/api/v1/upload', {
       method: 'POST',
