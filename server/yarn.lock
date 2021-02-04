@@ -460,8 +460,8 @@ buffer@^5.1.0, buffer@^5.5.0:
 
 bytes@3.1.0:
   version "3.1.0"
-  resolved "https://npm-registry.megvii-inc.com/bytes/download/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
-  integrity sha1-9s95M6Ng4FiPqf3oVlHNx/gF0fY=
+  resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
+  integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
 
 cache-content-type@^1.0.0:
   version "1.0.1"
@@ -520,8 +520,8 @@ clone@^1.0.2:
 
 co-body@^6.0.0:
   version "6.1.0"
-  resolved "https://npm-registry.megvii-inc.com/co-body/download/co-body-6.1.0.tgz#d87a8efc3564f9bfe3aced8ef5cd04c7a8766547"
-  integrity sha1-2HqO/DVk+b/jrO2O9c0Ex6h2ZUc=
+  resolved "https://registry.yarnpkg.com/co-body/-/co-body-6.1.0.tgz#d87a8efc3564f9bfe3aced8ef5cd04c7a8766547"
+  integrity sha512-m7pOT6CdLN7FuXUcpuz/8lfQ/L77x8SchHCF4G0RBTJO20Wzmhn5Sp4/5WsKy8OSpifBSUrmg83qEqaDHdyFuQ==
   dependencies:
     inflation "^2.0.0"
     qs "^6.5.2"
@@ -603,7 +603,7 @@ cookies@~0.8.0:
 
 copy-to@^2.0.1:
   version "2.0.1"
-  resolved "https://npm-registry.megvii-inc.com/copy-to/download/copy-to-2.0.1.tgz#2680fbb8068a48d08656b6098092bdafc906f4a5"
+  resolved "https://registry.yarnpkg.com/copy-to/-/copy-to-2.0.1.tgz#2680fbb8068a48d08656b6098092bdafc906f4a5"
   integrity sha1-JoD7uAaKSNCGVrYJgJK9r8kG9KU=
 
 core-util-is@~1.0.0:
@@ -1031,8 +1031,8 @@ human-signals@^1.1.1:
 
 iconv-lite@0.4.24:
   version "0.4.24"
-  resolved "https://npm-registry.megvii-inc.com/iconv-lite/download/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
-  integrity sha1-ICK0sl+93CHS9SSXSkdKr+czkIs=
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
+  integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
@@ -1043,7 +1043,7 @@ ieee754@^1.1.13:
 
 inflation@^2.0.0:
   version "2.0.0"
-  resolved "https://npm-registry.megvii-inc.com/inflation/download/inflation-2.0.0.tgz#8b417e47c28f925a45133d914ca1fd389107f30f"
+  resolved "https://registry.yarnpkg.com/inflation/-/inflation-2.0.0.tgz#8b417e47c28f925a45133d914ca1fd389107f30f"
   integrity sha1-i0F+R8KPklpFEz2RTKH9OJEH8w8=
 
 inflight@^1.0.4:
@@ -1168,8 +1168,8 @@ keygrip@~1.1.0:
 
 koa-bodyparser@^4.3.0:
   version "4.3.0"
-  resolved "https://npm-registry.megvii-inc.com/koa-bodyparser/download/koa-bodyparser-4.3.0.tgz#274c778555ff48fa221ee7f36a9fbdbace22759a"
-  integrity sha1-J0x3hVX/SPoiHufzap+9us4idZo=
+  resolved "https://registry.yarnpkg.com/koa-bodyparser/-/koa-bodyparser-4.3.0.tgz#274c778555ff48fa221ee7f36a9fbdbace22759a"
+  integrity sha512-uyV8G29KAGwZc4q/0WUAjH+Tsmuv9ImfBUF2oZVyZtaeo0husInagyn/JH85xMSxM0hEk/mbCII5ubLDuqW/Rw==
   dependencies:
     co-body "^6.0.0"
     copy-to "^2.0.1"
@@ -1203,6 +1203,16 @@ koa-functions-api@^1.0.7:
     "@iuv-tools/utils" "^1.0.0-beta.2"
     "@types/koa" "^2.11.6"
     koa "^2.13.0"
+
+koa-upload-api@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/koa-upload-api/-/koa-upload-api-1.0.1.tgz#fbe8b7d4f1fec2ea21994b58f519d366d6c2908b"
+  integrity sha512-pZPTMbIu+pnVhYdkckmiPlnUt2TfKgTJbnkiHeCuzanGGq85w8QoNuxjI1PERulaUj/3wKH4Sf3lm7BYEO9j6A==
+  dependencies:
+    "@types/formidable" "^1.0.31"
+    "@types/fs-extra" "^9.0.6"
+    formidable "^1.2.2"
+    fs-extra "^9.1.0"
 
 koa@^2.13.0:
   version "2.13.1"
@@ -1399,14 +1409,6 @@ node-fetch@^2.6.0:
   resolved "https://registry.npm.taobao.org/node-fetch/download/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha1-BFvTI2Mfdu0uK1VXM5RBa2OaAFI=
 
-node-upload-api@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/node-upload-api/-/node-upload-api-1.0.2.tgz#cdb776e2cc955f444b2f97aaa385a8847c094632"
-  integrity sha512-KY71BOZu6U0s66YhJTcBAlY6Vxda3s8oV9l87WfzSOT6OTjo8ks4oo5uTMic6JpPkOZt2SZBcpj5pfbKu2RJ8w==
-  dependencies:
-    "@types/formidable" "^1.0.31"
-    formidable "^1.2.2"
-
 normalize-path@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/normalize-path/download/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
@@ -1554,13 +1556,13 @@ q@^1.1.2:
 
 qs@^6.5.2:
   version "6.9.6"
-  resolved "https://npm-registry.megvii-inc.com/qs/download/qs-6.9.6.tgz#26ed3c8243a431b2924aca84cc90471f35d5a0ee"
-  integrity sha1-Ju08gkOkMbKSSsqEzJBHHzXVoO4=
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.6.tgz#26ed3c8243a431b2924aca84cc90471f35d5a0ee"
+  integrity sha512-TIRk4aqYLNoJUbd+g2lEdz5kLWIuTMRagAXxl78Q0RiVjAOugHmeKNGdd3cwo/ktpf9aL9epCfFqWDEKysUlLQ==
 
 raw-body@^2.3.3:
   version "2.4.1"
-  resolved "https://npm-registry.megvii-inc.com/raw-body/download/raw-body-2.4.1.tgz#30ac82f98bb5ae8c152e67149dac8d55153b168c"
-  integrity sha1-MKyC+Yu1rowVLmcUnayNVRU7Fow=
+  resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.4.1.tgz#30ac82f98bb5ae8c152e67149dac8d55153b168c"
+  integrity sha512-9WmIKF6mkvA0SLmA2Knm9+qj89e+j1zqgyn8aXGd7+nAduPoqgI9lO57SAZNn/Byzo5P7JhXTyg9PzaJbH73bA==
   dependencies:
     bytes "3.1.0"
     http-errors "1.7.3"
@@ -1622,8 +1624,8 @@ safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.2.0:
 
 "safer-buffer@>= 2.1.2 < 3":
   version "2.1.2"
-  resolved "https://npm-registry.megvii-inc.com/safer-buffer/download/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
-  integrity sha1-RPoWGwGHuVSd2Eu5GAL5vYOFzWo=
+  resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
+  integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 saslprep@^1.0.0:
   version "1.0.3"
@@ -1822,7 +1824,7 @@ universalify@^2.0.0:
 
 unpipe@1.0.0:
   version "1.0.0"
-  resolved "https://npm-registry.megvii-inc.com/unpipe/download/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
+  resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
 
 unquote@~1.1.1:

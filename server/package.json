@@ -4,8 +4,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc && cross-env NODE_ENV=dev node dist",
-    "debug": "tsc && cross-env NODE_ENV=dev node --inspect dist"
+    "dev": "rm -rf dist && tsc && cross-env NODE_ENV=dev node dist",
+    "debug": "rm -rf dist && tsc && cross-env NODE_ENV=dev node --inspect dist"
   },
   "dependencies": {
     "@eryue/injector": "^1.2.3",
@@ -25,8 +25,8 @@
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-functions-api": "^1.0.7",
+    "koa-upload-api": "^1.0.1",
     "md5": "^2.3.0",
-    "mongodb": "^3.6.3",
-    "node-upload-api": "^1.0.2"
+    "mongodb": "^3.6.3"
   }
 }
