@@ -1,6 +1,6 @@
 import SvgOptimize from '@open-fe/svg-icons/scripts/svgo';
 import { readFileSync } from 'fs-extra';
-import { UploadedResult } from 'node-upload-api';
+import { UploadedResult } from 'koa-upload-api';
 
 const svgo = new SvgOptimize();
 
@@ -11,18 +11,17 @@ interface UploadApiService {
 const uploadApiService: UploadApiService = {
   async validator(cx: KoaContext): Promise<boolean> {
     const {
-      alias,
-      name
+      alias
     } = cx.request.body;
     
-    if (!alias || !name) {
+    if (!alias) {
       const {
         code,
         msg
       } = cx.codes.INVALID_REQUEST_PARAMS;
       cx.body = {
         code,
-        msg: `${msg}: 'alias' and 'name' expected.`
+        msg: `${msg}: 'alias' expected.`
       };
       return false;
     }
@@ -57,6 +56,9 @@ const uploadApiService: UploadApiService = {
         msg: `${msg}: ${error.message}`
       }
     } else {
+      const {
+        alias
+      } = cx.request.body;
       const file: {[key: string]: any} = files.svg;
       if (file) {
         const {
@@ -66,7 +68,20 @@ const uploadApiService: UploadApiService = {
         const filename = name.replace(/\.\w+$/, '');
         const svgContent = readFileSync(filepath).toString();
         const svgInfo = await svgo.build(filename, svgContent);
-        cx.body = svgInfo;
+
+        const svgData = {
+          ...svgInfo,
+          alias,
+          createTime: Date.now(),
+          userId: '',
+          userName: ''
+        };
+        await cx.$svg.insertOne(svgData);
+        cx.body = {
+          code: cx.codes.SUCCESS.code,
+          msg: '',
+          data: svgData
+        };
       }
     }
   }

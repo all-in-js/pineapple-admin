@@ -55,7 +55,7 @@ function App(props: any) {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route path="/icons/:id">
+        <Route path="/icons/:alias">
           <IconsPage />
         </Route>
         <Route path="/login">

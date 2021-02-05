@@ -7,6 +7,8 @@ import init from './init';
 import uploadApiService from './services/upload-svg';
 import * as projectFunctions from './functions-api/projects';
 import * as userFunctions from './functions-api/users';
+import * as svgFunctions from './functions-api/svgs';
+import { ObjectID } from 'mongodb';
 
 const app = new Koa<{}, KoaContext>();
 
@@ -25,7 +27,8 @@ app.use(functionsApiMiddleware<IExtendContext>({
   // namespace: 'api',
   functions: [
     ...Object.values(projectFunctions),
-    ...Object.values(userFunctions)
+    ...Object.values(userFunctions),
+    ...Object.values(svgFunctions)
   ],
   errorHandler(cx, err) {
     console.log(err);

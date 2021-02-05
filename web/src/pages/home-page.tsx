@@ -120,7 +120,7 @@ function HomePage() {
       dataIndex: 'name',
       width: 150,
       render(val: string, row: any) {
-        return <Link to={`/icons/${row._id}`}>{ val }</Link>
+        return <Link to={`/icons/${row.alias}`}>{ val }</Link>
       }
     },
     {
