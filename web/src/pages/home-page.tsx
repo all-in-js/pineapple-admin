@@ -178,7 +178,6 @@ function HomePage() {
       }
     },
   ];
-
   async function getProjects() {
     setLoadingData(true);
     const { code, msg, data } = await fetch('/api/functions', {

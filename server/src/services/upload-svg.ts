@@ -11,17 +11,17 @@ interface UploadApiService {
 const uploadApiService: UploadApiService = {
   async validator(cx: KoaContext): Promise<boolean> {
     const {
-      alias
+      alias,
+      name
     } = cx.request.body;
-    
-    if (!alias) {
+    if (!alias || !name || alias === 'undefined' || name === 'undefined') {
       const {
         code,
         msg
       } = cx.codes.INVALID_REQUEST_PARAMS;
       cx.body = {
         code,
-        msg: `${msg}: 'alias' expected.`
+        msg: `${msg}: 'alias' and 'name' expected.`
       };
       return false;
     }
@@ -38,6 +38,22 @@ const uploadApiService: UploadApiService = {
       };
       return false;
     }
+
+    const svg = await cx.$svg.findOne({
+      alias,
+      name
+    });
+    if (svg) {
+      const {
+        code,
+        msg
+      } = cx.codes.RESOURCE_REPEAT;
+      cx.body = {
+        code,
+        msg: `${msg}: '${name}'名称重复`
+      };
+      return false;
+    }
     return true;
   },
   async response(cx: KoaContext, result: UploadedResult) {
@@ -46,7 +62,6 @@ const uploadApiService: UploadApiService = {
       files
     } = result;
     if (error) {
-      console.log(error);
       const {
         code,
         msg
@@ -57,20 +72,20 @@ const uploadApiService: UploadApiService = {
       }
     } else {
       const {
-        alias
+        alias,
+        name
       } = cx.request.body;
       const file: {[key: string]: any} = files.svg;
       if (file) {
         const {
-          name,
           path: filepath
         } = file;
-        const filename = name.replace(/\.\w+$/, '');
         const svgContent = readFileSync(filepath).toString();
-        const svgInfo = await svgo.build(filename, svgContent);
+        const svgInfo = await svgo.build(name, svgContent);
 
         const svgData = {
           ...svgInfo,
+          name,
           alias,
           createTime: Date.now(),
           userId: '',

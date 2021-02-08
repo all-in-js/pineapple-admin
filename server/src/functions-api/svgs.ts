@@ -8,12 +8,14 @@
  */
 interface SvgListParams {
   name?: string;
+  alias?: string;
   pageSize?: number;
   pageNo?: number;
 }
 export async function svgList(cx: KoaContext, vars: SvgListParams) {
   const {
     name,
+    alias,
     pageSize = 50,
     pageNo = 1
   } = vars;
@@ -24,7 +26,10 @@ export async function svgList(cx: KoaContext, vars: SvgListParams) {
       $regex: new RegExp(name, 'ig')
     }
   }
-  const svgs = await cx.$svg.find(query).limit(pageSize).skip((pageNo - 1) * pageSize).toArray();
+  if (alias) {
+    query.alias = alias;
+  }
+  const svgs = await cx.$svg.find(query).sort({createTime: -1}).limit(pageSize).skip((pageNo - 1) * pageSize).toArray();
   return {
     code: cx.codes.SUCCESS.code,
     msg: '',

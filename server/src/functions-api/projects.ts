@@ -57,22 +57,38 @@ export async function projects(cx: KoaContext, vars: SearchProjectParams) {
  * }
  */
 type params = {
-  id: string;
+  id?: string;
+  alias?: string;
 }
 export async function project(cx: KoaContext, vars: params) {
-  const { id } = vars;
+  const { id, alias } = vars;
 
-  if (!id) {
-    cx.status = 400;
+  if (!id && !alias) {
+    const {
+      code,
+      msg
+    } = cx.codes.INVALID_REQUEST_PARAMS;
     return {
-      success: false,
-      msg: `'id' expected.`
+      code,
+      msg: `${msg}: 'id' or 'alias' expected.`
     }
   }
 
-  const project = await cx.$project.findOne({_id: new ObjectID(id)});
+  const query: any = {};
+  if (id) {
+    query._id = new ObjectID(id);
+  }
+  if (alias) {
+    query.alias = alias;
+  }
 
-  return project;
+  const project = await cx.$project.findOne(query);
+
+  return {
+    code: cx.codes.SUCCESS.code,
+    msg: '',
+    data: project
+  };
 }
 
 /**

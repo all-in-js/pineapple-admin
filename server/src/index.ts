@@ -8,9 +8,24 @@ import uploadApiService from './services/upload-svg';
 import * as projectFunctions from './functions-api/projects';
 import * as userFunctions from './functions-api/users';
 import * as svgFunctions from './functions-api/svgs';
-import { ObjectID } from 'mongodb';
 
 const app = new Koa<{}, KoaContext>();
+
+app.use(async (cx, next) => {
+  try {
+    await next();
+  } catch (e) {
+    console.log(e);
+    const {
+      code,
+      msg
+    } = cx.codes.INNER_ERROR;
+    cx.body = {
+      code,
+      msg: `${msg}: ${e.message}`
+    };
+  }
+});
 
 app.use(cors());
 

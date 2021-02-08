@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button, Dropdown, Menu, Upload } from 'antd';
+import { Button, Dropdown, Menu, message, Upload } from 'antd';
 import IconFont from '../components/icon-font';
 
 const {
@@ -8,13 +8,24 @@ const {
   useEffect
 } = React;
 
+interface ProjInfo {
+  name: string;
+  alias: string;
+  [key: string]: string | boolean | number;
+}
+
 function IconsPage(props: any) {
   const {
     alias
   } = props.match.params;
   const [svgList, setSvgList] = useState([]);
+  const [projInfo, setProjInfo] = useState<ProjInfo>({
+    name: '',
+    alias: ''
+  });
   const [searchForm, setSearchForm] = useState({
     name: '',
+    alias,
     pageNo: 1,
     pageSize: 50
   });
@@ -29,29 +40,38 @@ function IconsPage(props: any) {
     </Menu>
   );
   const getSvgs = async () => {
-    const {
-      code,
-      data
-    } = await fetch('/api/functions', {
-      method: 'POST',
-      body: JSON.stringify({
-        $fns: 'api/svgList',
-        $vars: searchForm
-      })
-    }).then((res) => res.json());
+    const data = await (window as any).$fetch.combine({
+      'api/project': { alias },
+      'api/svgList': searchForm
+    }).then((res: any) => res.json());
 
-    if (code === 1000 && data.length) {
-      setSvgList(data);
+    if (data.length) {
+      const [projRes, svgsRes] = data;
+      if (projRes.code === 1000) {
+        setProjInfo(projRes.data);
+      }
+      if (svgsRes.code === 1000) {
+        setSvgList(svgsRes.data);
+      }
     }
   }
-  const handleUpload = (info: any) => {
+  const handleUpload = async (info: any) => {
+    console.log(info);
     const fd = new FormData();
+    const name = info.file.name.replace(/\.\w+$/, '');
     fd.append('svg', info.file);
     fd.append('alias', alias);
-    fetch('/api/v1/upload', {
+    fd.append('name', name);
+    const { code, msg } = await fetch('/api/v1/upload', {
       method: 'POST',
       body: fd
-    });
+    }).then((res) => res.json());
+    if (code === 1000) {
+      message.success(`'${name}' 上传成功`);
+      getSvgs();
+    } else {
+      message.error(msg);
+    }
   }
   useEffect(() => {
     getSvgs();
@@ -65,8 +85,8 @@ function IconsPage(props: any) {
             className="page-back"
             size="18px"
             name="icon-back" />
-          <strong>sss图标库</strong>
-          <small>cbg-icns</small>
+          <strong>{projInfo.name}</strong>
+          <small>{projInfo.alias}</small>
         </div>
         <div className="icons-ctrls">
           <Upload
@@ -94,7 +114,18 @@ function IconsPage(props: any) {
       </div>
       <div className="content">
         <div className="left">
-          
+          {
+            svgList.map((svg: any, i: number) => {
+              return (
+                <div
+                  key={i}
+                  className="svg-item">
+                  <i className="iconfont icon-tupian svg-icon"></i>
+                  <div className="icon-name nobr">{svg.name}</div>
+                </div>
+              );
+            })
+          }
         </div>
         <div className="right">
   
