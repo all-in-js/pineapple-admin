@@ -1,6 +1,6 @@
-import SvgOptimize from '@open-fe/svg-icons/scripts/svgo';
+import SvgOptimize from '@all-in-js/svg-icons/scripts/svgo';
 import { readFileSync } from 'fs-extra';
-import { UploadedResult } from 'koa-upload-api';
+import { UploadedResult } from '@all-in-js/koa-upload-api';
 
 const svgo = new SvgOptimize();
 

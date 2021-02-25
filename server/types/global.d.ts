@@ -1,6 +1,6 @@
 import Koa from 'koa';
 import MongoDB from 'mongodb';
-import { ExtendContext } from 'koa-functions-api';
+import { ExtendContext } from '@all-in-js/koa-functions-api';
 import { IcodesMap } from '../src/init/init-codes';
 
 /**

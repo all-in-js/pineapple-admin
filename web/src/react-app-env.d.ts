@@ -70,4 +70,4 @@ declare module '*.module.sass' {
   export default classes;
 }
 
-declare module 'fetch-functions-api';
+declare module '@all-in-js/fetch-functions-api';

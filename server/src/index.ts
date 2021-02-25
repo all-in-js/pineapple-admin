@@ -1,8 +1,8 @@
 import Koa from 'koa';
 import cors from '@koa/cors';
 import bodyparser from 'koa-bodyparser';
-import uploadApi from 'koa-upload-api';
-import { functionsApiMiddleware } from 'koa-functions-api';
+import uploadApi from '@all-in-js/koa-upload-api';
+import { functionsApiMiddleware } from '@all-in-js/koa-functions-api';
 import init from './init';
 import uploadApiService from './services/upload-svg';
 import * as projectFunctions from './functions-api/projects';
@@ -58,15 +58,11 @@ app.use(functionsApiMiddleware<IExtendContext>({
   }
 }));
 
-const port = 4000;
-
 /**
  * 初始化应用
  */
-init(app).then(() => {
-  app.listen({ port }, () =>
-    console.log(`🚀 Server ready at http://localhost:${port}/api/functions`)
-  );
+init(app).then(port => {
+  console.log(`🚀 Server ready at http://localhost:${port}/api/functions`)
 }).catch(e => {
   console.log(e);
   process.exit();

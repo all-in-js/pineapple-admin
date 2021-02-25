@@ -1,1 +1,1 @@
-declare module '@open-fe/svg-icons/scripts/svgo';
+declare module '@all-in-js/svg-icons/scripts/svgo';

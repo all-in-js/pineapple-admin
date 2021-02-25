@@ -8,9 +8,12 @@
     "debug": "rm -rf dist && tsc && cross-env NODE_ENV=dev node --inspect dist"
   },
   "dependencies": {
-    "@eryue/injector": "^1.2.3",
+    "@all-in-js/injector": "^1.0.0",
+    "@all-in-js/koa-functions-api": "^1.0.0",
+    "@all-in-js/koa-upload-api": "^1.0.0",
+    "@all-in-js/svg-icons": "^1.0.1",
+    "@all-in-js/utils": "^1.0.1",
     "@koa/cors": "^3.1.0",
-    "@open-fe/svg-icons": "^1.0.0",
     "@types/formidable": "^1.0.32",
     "@types/fs-extra": "^9.0.6",
     "@types/koa": "^2.11.6",
@@ -24,8 +27,6 @@
     "fs-extra": "^9.1.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
-    "koa-functions-api": "^1.0.7",
-    "koa-upload-api": "^1.0.1",
     "md5": "^2.3.0",
     "mongodb": "^3.6.3"
   }

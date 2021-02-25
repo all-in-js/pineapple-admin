@@ -4,6 +4,7 @@ import connectDatabase from './connect-db';
 import initCollections from './init-collection';
 
 export default function(app: App) {
+  const port = 4000;
   const dbEnv = initDBenv();
   app.context.db_env = dbEnv;
 
@@ -11,5 +12,7 @@ export default function(app: App) {
 
   return connectDatabase(app).then((mongoClient) => {
     initCollections(app, mongoClient);
+    app.listen({ port });
+    return port;
   });
 }

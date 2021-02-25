@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import Fetch from 'fetch-functions-api';
+import Fetch from '@all-in-js/fetch-functions-api';
 import {
   BrowserRouter as Router
 } from "react-router-dom";
