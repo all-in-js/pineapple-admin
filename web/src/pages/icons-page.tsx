@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button, Dropdown, Menu, message, Upload } from 'antd';
+import copy from 'clipboard-copy';
+import { Button, Dropdown, Menu, message, Upload, Tooltip, Popover } from 'antd';
 import IconFont from '../components/icon-font';
 
 const {
@@ -11,7 +12,8 @@ const {
 interface ProjInfo {
   name: string;
   alias: string;
-  [key: string]: string | boolean | number;
+  totalMembers: string[];
+  [key: string]: string | boolean | number | string[];
 }
 
 function IconsPage(props: any) {
@@ -21,7 +23,8 @@ function IconsPage(props: any) {
   const [svgList, setSvgList] = useState([]);
   const [projInfo, setProjInfo] = useState<ProjInfo>({
     name: '',
-    alias: ''
+    alias: '',
+    totalMembers: []
   });
   const [searchForm, setSearchForm] = useState({
     name: '',
@@ -73,6 +76,11 @@ function IconsPage(props: any) {
       message.error(msg);
     }
   }
+  const handleCopyCode = async (name: string) => {
+    const code = `<vue-icon name="${name}"></vue-icon>`;
+    await copy(code);
+    message.success(`copied! ${code}`);
+  }
   useEffect(() => {
     getSvgs();
   }, []);
@@ -87,6 +95,7 @@ function IconsPage(props: any) {
             name="icon-back" />
           <strong>{projInfo.name}</strong>
           <small>{projInfo.alias}</small>
+          <span className="icons-count">{svgList.length}</span>
         </div>
         <div className="icons-ctrls">
           <Upload
@@ -107,7 +116,7 @@ function IconsPage(props: any) {
             <Button className="icons-download">
               <IconFont size="20px" name="icon-Clouddownload-Outlined" />
               下载资源
-              <IconFont size="20px" name="icon-Icon-KeyboardArrow-Down-Rounded1" />
+              <IconFont name="icon-Icon-KeyboardArrow-Down-Rounded1" />
             </Button>
           </Dropdown>
         </div>
@@ -116,19 +125,53 @@ function IconsPage(props: any) {
         <div className="left">
           {
             svgList.map((svg: any, i: number) => {
+              const content = (
+                <Menu>
+                  <Menu.Item>下载 SVG</Menu.Item>
+                  <Menu.Item>下载 PNG</Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Item>编辑</Menu.Item>
+                  <Menu.Item>删除</Menu.Item>
+                </Menu>
+              );
               return (
                 <div
                   key={i}
                   className="svg-item">
                   <i className="iconfont icon-tupian svg-icon"></i>
                   <div className="icon-name nobr">{svg.name}</div>
+                  <Dropdown overlay={content}>
+                    <i className="iconfont icon-more-vertical icon-ctrls"></i>
+                  </Dropdown>
+                  <div
+                    onClick={() => handleCopyCode(svg.name)}
+                    className="copy-icon-code">复制代码</div>
                 </div>
               );
             })
           }
         </div>
         <div className="right">
-  
+          <div className="title">项目成员 <span className="counter">{projInfo.totalMembers.length}</span></div>
+          <div className="memebers">
+            {
+              projInfo.totalMembers.length ?
+              projInfo.totalMembers.map((member: any, i: number) => {
+                return (
+                  <Tooltip title={member.username} key={i}>
+                    <div
+                      style={{background: member.imgColor}}
+                      className="member-icon">{member.username.slice(0, 1)}</div>
+                  </Tooltip>
+                );
+              }) :
+              null
+            }
+          </div>
+          <Button className="invite-member">
+            <IconFont size="20px" name="icon-add" />
+            添加成员
+          </Button>
         </div>
       </div>
     </div>

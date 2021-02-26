@@ -2,6 +2,9 @@
 import md5 from 'md5';
 import { ObjectID } from 'mongodb';
 
+function randColor() {
+  return Math.round(Math.random() * 255);
+}
 /**
  * 新建用户
  * {
@@ -55,6 +58,7 @@ export async function addUser(cx: KoaContext, vars: NewUserParams) {
     password: pwdHash,
     role,
     using,
+    imgColor: `rgb(${randColor()},${randColor()},${randColor()})`,
     createTime: Date.now(),
     creator: ''
   });

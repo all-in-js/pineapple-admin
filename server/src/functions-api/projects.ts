@@ -83,6 +83,17 @@ export async function project(cx: KoaContext, vars: params) {
   }
 
   const project = await cx.$project.findOne(query);
+  
+  let {totalMembers} = project;
+  if (totalMembers.length) {
+    for (let i=0; i < totalMembers.length; i++) {
+      const memberId = totalMembers[i];
+      const memberInfo = await cx.$user.findOne({_id: new ObjectID(memberId)});
+      console.log(memberInfo);
+      totalMembers[i] = memberInfo;
+    }
+  }
+  project.totalMembers = totalMembers;
 
   return {
     code: cx.codes.SUCCESS.code,
@@ -106,6 +117,7 @@ interface ProjectParams {
   mark?: string;
   using?: boolean;
 }
+// TODO: totalMembers默认添加创建者
 export async function addProject(cx: KoaContext, vars: ProjectParams) {
   const {
     name,

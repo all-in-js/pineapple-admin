@@ -252,6 +252,18 @@ input::placeholder {
         color: #999;
       }
     }
+    .icons-count {
+      display: inline-block;
+      min-width: 20px;
+      padding: 0 6px;
+      font-size: 12px;
+      line-height: 18px;
+      border-radius: 16px;
+      color: #24292e;
+      text-align: center;
+      background-color: #e8eaec;
+      margin-left: 6px;
+    }
     .page-back {
       font-weight: bold;
       padding: 5px;
@@ -275,23 +287,104 @@ input::placeholder {
   .content {
     display: flex;
     margin: 0 25px;
-    background: #fff;
     .left {
       flex: 1;
+      background: #fff;
       .svg-item {
+        position: relative;
         display: inline-block;
         width: 110px;
         margin: 10px;
         text-align: center;
         height: 110px;
         padding: 5px;
+        &:hover {
+          background: #eef3f7;
+          border-radius: 4px;
+          .copy-icon-code {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          .icon-ctrls {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .icon-name {
+          line-height: 1;
+        }
+        .copy-icon-code {
+          transition: .35s all;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          line-height: 35px;
+          color: #1067d1;
+          text-align: center;
+          font-size: 13px;
+          cursor: pointer;
+          opacity: 0;
+          transform: translateY(5px);
+        }
       }
       .svg-icon {
         font-size: 36px;
       }
+      .icon-ctrls {
+        position: absolute;
+        top: 5px;
+        width: 25px;
+        right: 0;
+        opacity: 0;
+        cursor: pointer;
+        transition: .35s all;
+        transform: translateY(-5px);
+      }
     }
     .right {
-      width: 350px;
+      width: 375px;
+      background: #fff;
+      margin-left: 20px;
+      .title {
+        font-weight: bold;
+        line-height: 45px;
+        padding: 0 15px;
+      }
+      .counter {
+        display: inline-block;
+        min-width: 20px;
+        padding: 0 6px;
+        font-size: 12px;
+        line-height: 18px;
+        border-radius: 16px;
+        color: #24292e;
+        text-align: center;
+        background-color: #e8eaec;
+      }
+      .memebers {
+        margin: -5px 10px;
+        .member-icon {
+          width: 36px;
+          height: 36px;
+          display: inline-block;
+          border-radius: 50px;
+          background: #1313d6;
+          text-align: center;
+          font-size: 24px;
+          line-height: 34px;
+          color: #fff;
+          margin: 5px;
+        }
+      }
+      .invite-member {
+        display: flex;
+        align-items: center;
+        margin: 15px;
+        .icon-add {
+          margin-right: 5px;
+        }
+      }
     }
   }
   .icons-download,.icons-upload {
