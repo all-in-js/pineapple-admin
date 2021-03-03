@@ -9,7 +9,7 @@ import './index.scss';
 import App from './app-layout';
 import reportWebVitals from './reportWebVitals';
 
-(window as any).$fetch = new Fetch('/api/functions');
+window.$fetch = new Fetch(`${window.API_HOST}/api/functions`);
 
 ReactDOM.render(
   <Router>

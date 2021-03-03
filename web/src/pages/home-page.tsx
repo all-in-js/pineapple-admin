@@ -185,7 +185,8 @@ function HomePage() {
   ];
   async function getProjects() {
     setLoadingData(true);
-    const { code, msg, data } = await fetch('/api/functions', {
+    console.log('process.env', process.env);
+    const { code, msg, data } = await fetch(window.API_HOST + '/api/functions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

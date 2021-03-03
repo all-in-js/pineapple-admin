@@ -43,7 +43,7 @@ function IconsPage(props: any) {
     </Menu>
   );
   const getSvgs = async () => {
-    const data = await (window as any).$fetch.combine({
+    const data = await window.$fetch.combine({
       'api/project': { alias },
       'api/svgList': searchForm
     }).then((res: any) => res.json());
@@ -59,7 +59,6 @@ function IconsPage(props: any) {
     }
   }
   const handleUpload = async (info: any) => {
-    console.log(info);
     const fd = new FormData();
     const name = info.file.name.replace(/\.\w+$/, '');
     fd.append('svg', info.file);
