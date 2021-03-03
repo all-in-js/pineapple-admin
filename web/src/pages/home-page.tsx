@@ -16,11 +16,12 @@ interface ProjectForm {
   alias: string;
   mark?: string;
   using: boolean;
+  [key: string]: any;
 }
 
 const { Option } = Select;
 
-const defaultForm: ProjectForm = {
+let defaultForm: ProjectForm = {
   name: '',
   alias: '',
   mark: '',
@@ -47,6 +48,7 @@ function HomePage() {
   const [showModal, setShowModal] = useState(false);
   const [loadingData, setLoadingData] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [projId, setProjId] = useState('');
   const [searchParams, setSearchParams] = useState<SearchProjectParams>(defaultSearchParams);
   const [maxHeight, setMaxHeight] = useState(0);
   const [form] = Form.useForm();
@@ -164,7 +166,10 @@ function HomePage() {
       dataIndex: 'operate',
       render(val: any, row: {[key: string]: any}) {
         return [
-          <Button key={0} type="link">编辑</Button>,
+          <Button
+            key={0}
+            type="link"
+            onClick={() => editProject(row)}>编辑</Button>,
           <Popconfirm
             key={1}
             title="确定删除该项目及相关联的所有图标吗？"
@@ -199,6 +204,10 @@ function HomePage() {
 
   async function submit() {
     const values = await form.validateFields();
+    if (projId) {
+      // 编辑
+      values.id = projId;
+    }
     const { code, msg } = await fetch('/api/functions', {
       method: 'POST',
       headers: {
@@ -220,6 +229,23 @@ function HomePage() {
   async function closeModal() {
     form.resetFields();
     setShowModal(false);
+  }
+
+  /**
+   * 编辑
+   */
+  async function editProject(project: any) {
+    setShowModal(true);
+    setProjId(project._id);
+    form.setFieldsValue(project);
+  }
+
+  /**
+   * 新建
+   */
+  async function showNewDialog() {
+    setProjId('');
+    setShowModal(true);
   }
 
   const onUsingChange = (val: valueType) => {
@@ -315,7 +341,7 @@ function HomePage() {
         <div className="result-head">
           <span>检索结果：共{projects.length}条</span>
           <Button
-            onClick={() => setShowModal(true)}
+            onClick={showNewDialog}
             type="primary">新建项目</Button>
         </div>
         <Table
@@ -330,7 +356,7 @@ function HomePage() {
         width="450px"
         destroyOnClose={true}
         visible={showModal}
-        title="新建项目"
+        title={projId ? '编辑项目' : '新建项目'}
         onOk={submit}
         onCancel={closeModal}>
         <Form
@@ -364,11 +390,11 @@ function HomePage() {
           </Form.Item>
           <Form.Item
             label="是否启用"
-            name="using">
+            name="using"
+            valuePropName="checked">
             <Switch
               checkedChildren="启用"
-              unCheckedChildren="禁用"
-              defaultChecked />
+              unCheckedChildren="禁用" />
           </Form.Item>
         </Form>
       </Modal>

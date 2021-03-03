@@ -43,6 +43,14 @@ export async function projects(cx: KoaContext, vars: SearchProjectParams) {
     query.using = using;
   }
   const projects = await cx.$project.find(query).sort({createTime: -1}).toArray();
+
+  if (projects.length) {
+    for(const proj of projects) {
+      const projIcons = await cx.$svg.find({alias: proj.alias}).count();
+      proj.totalIcons = projIcons;
+    }
+  }
+
   return {
     code: cx.codes.SUCCESS.code,
     data: projects,
@@ -89,7 +97,6 @@ export async function project(cx: KoaContext, vars: params) {
     for (let i=0; i < totalMembers.length; i++) {
       const memberId = totalMembers[i];
       const memberInfo = await cx.$user.findOne({_id: new ObjectID(memberId)});
-      console.log(memberInfo);
       totalMembers[i] = memberInfo;
     }
   }
@@ -112,6 +119,7 @@ export async function project(cx: KoaContext, vars: params) {
  * }
  */
 interface ProjectParams {
+  id?: string;
   name?: string;
   alias?: string;
   mark?: string;
@@ -120,6 +128,7 @@ interface ProjectParams {
 // TODO: totalMembers默认添加创建者
 export async function addProject(cx: KoaContext, vars: ProjectParams) {
   const {
+    id,
     name,
     alias,
     mark,
@@ -138,7 +147,7 @@ export async function addProject(cx: KoaContext, vars: ProjectParams) {
   }
 
   const project = await cx.$project.findOne({alias});
-  if (project) {
+  if (project && project._id !== id) {
     const {
       code,
       msg
