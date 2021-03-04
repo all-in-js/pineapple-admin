@@ -9,6 +9,7 @@ import './index.scss';
 import App from './app-layout';
 import reportWebVitals from './reportWebVitals';
 
+window.API_HOST = process.env.API_HOST || '';
 window.$fetch = new Fetch(`${window.API_HOST}/api/functions`);
 
 ReactDOM.render(

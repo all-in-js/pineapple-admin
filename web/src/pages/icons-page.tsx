@@ -46,7 +46,7 @@ function IconsPage(props: any) {
     const data = await window.$fetch.combine({
       'api/project': { alias },
       'api/svgList': searchForm
-    }).then((res: any) => res.json());
+    });
 
     if (data.length) {
       const [projRes, svgsRes] = data;

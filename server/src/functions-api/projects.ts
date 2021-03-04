@@ -146,15 +146,34 @@ export async function addProject(cx: KoaContext, vars: ProjectParams) {
     };
   }
 
-  const project = await cx.$project.findOne({alias});
-  if (project && project._id !== id) {
-    const {
-      code,
-      msg
-    } = cx.codes.RESOURCE_REPEAT;
-    return {
-      code,
-      msg: `${msg}: 项目alias重复`
+  if (id) {
+    // 编辑
+    const project = await cx.$project.findOne({_id: new ObjectID(id)});
+    if (project && project.alias !== alias) {
+      const someProj = await cx.$project.findOne({ alias });
+      if (someProj) {
+        const {
+          code,
+          msg
+        } = cx.codes.RESOURCE_REPEAT;
+        return {
+          code,
+          msg: `${msg}: 项目alias重复`
+        }
+      }
+    }
+  } else {
+    // 新建
+    const project = await cx.$project.findOne({ alias });
+    if (project) {
+      const {
+        code,
+        msg
+      } = cx.codes.RESOURCE_REPEAT;
+      return {
+        code,
+        msg: `${msg}: 项目alias重复`
+      }
     }
   }
 

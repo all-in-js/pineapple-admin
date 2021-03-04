@@ -41,15 +41,7 @@ function ManageUser() {
   
   const getUserList = async () => {
     setLoadingData(true);
-    const { code, msg, data } = await fetch('/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $fns: 'api/userList'
-      })
-    }).then((res) => res.json());
+    const { code, msg, data } = await window.$fetch.post('api/userList');
     setLoadingData(false);
     if (code === 1000) {
       setUserList(data);
@@ -60,16 +52,7 @@ function ManageUser() {
 
   const submit = async () => {
     const values = await form.validateFields();
-    const { code, msg } = await fetch('/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $vars: values,
-        $fns: 'api/addUser'
-      })
-    }).then((res) => res.json());
+    const { code, msg } = await window.$fetch.post('api/addUser', values);
     if (code === 1000) {
       message.success(msg);
       closeModal();
@@ -89,16 +72,7 @@ function ManageUser() {
     } else {
       params.using = undefined;
     }
-    const { code, msg, data } = await fetch('/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $vars: params,
-        $fns: 'api/userList'
-      })
-    }).then((res) => res.json());
+    const { code, msg, data } = await window.$fetch.post('api/userList', params);
     if (code === 1000) {
       setUserList(data);
     } else {
@@ -117,18 +91,7 @@ function ManageUser() {
   }
 
   async function confirm(id: any) {
-    const { code, msg } = await fetch('/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $fns: 'api/deleteUser',
-        $vars: {
-          id
-        }
-      })
-    }).then((res) => res.json());
+    const { code, msg } = await window.$fetch.post('api/deleteUser', { id });
     if (code === 1000) {
       message.success(msg);
       getUserList();
@@ -142,19 +105,10 @@ function ManageUser() {
     const [checked, setChecked] = useState(!row.using);
     const handleChange = async () => {
       setLoading(true);
-      const { code, msg } = await fetch('/api/functions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          $fns: 'api/toggleUserStatus',
-          $vars: {
+      const { code, msg } = await window.$fetch.post('api/toggleUserStatus', {
             id: row._id,
             newStatus: !row.using
-          }
-        })
-      }).then((res) => res.json());
+          });
       setLoading(false);
       if (code === 1000) {
         getUserList();

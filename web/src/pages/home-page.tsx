@@ -66,19 +66,10 @@ function HomePage() {
     const [checked, setChecked] = useState(!row.using);
     const handleChange = async () => {
       setLoading(true);
-      const { code, msg } = await fetch('/api/functions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          $fns: 'api/toggleProjectStatus',
-          $vars: {
-            id: row._id,
-            newStatus: !row.using
-          }
-        })
-      }).then((res) => res.json());
+      const { code, msg } = await window.$fetch.post('api/toggleProjectStatus', {
+        id: row._id,
+        newStatus: !row.using
+      });
       setLoading(false);
       if (code === 1000) {
         getProjects();
@@ -96,18 +87,7 @@ function HomePage() {
   }
 
   async function confirm(alias: string) {
-    const { code, msg } = await fetch('/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $fns: 'api/deleteProject',
-        $vars: {
-          alias
-        }
-      })
-    }).then((res) => res.json());
+    const { code, msg } = await window.$fetch.post('/api/deleteProject', { alias });
     if (code === 1000) {
       message.success(msg);
       getProjects();
@@ -186,15 +166,7 @@ function HomePage() {
   async function getProjects() {
     setLoadingData(true);
     console.log('process.env', process.env);
-    const { code, msg, data } = await fetch(window.API_HOST + '/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $fns: 'api/projects'
-      })
-    }).then((res) => res.json());
+    const { code, msg, data } = await window.$fetch.post('/api/projects');
     setLoadingData(false);
     if (code === 1000) {
       setProjects(data);
@@ -209,16 +181,7 @@ function HomePage() {
       // 编辑
       values.id = projId;
     }
-    const { code, msg } = await fetch('/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $vars: values,
-        $fns: 'api/addProject'
-      })
-    }).then((res) => res.json());
+    const { code, msg } = await window.$fetch.post('/api/addProject', values);
     if (code === 1000) {
       message.success(msg);
       closeModal();
@@ -273,16 +236,7 @@ function HomePage() {
       params.using = undefined;
     }
     
-    const { code, msg, data } = await fetch('/api/functions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        $vars: params,
-        $fns: 'api/projects'
-      })
-    }).then((res) => res.json());
+    const { code, msg, data } = await window.$fetch.post('/api/projects', params);
     if (code === 1000) {
       setProjects(data);
     } else {
