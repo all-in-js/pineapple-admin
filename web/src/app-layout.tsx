@@ -6,6 +6,8 @@ import {
   Redirect,
   useLocation
 } from "react-router-dom";
+import { Button, Dropdown, Menu } from 'antd';
+import IconFont from './components/icon-font';
 import LoginPage from './pages/login';
 import HomePage from './pages/home-page';
 import IconsPage from './pages/icons-page';
@@ -19,6 +21,22 @@ const {
 
 function LayoutFrame(props: any) {
   const { isLogin } = props;
+  const content = (
+    <Menu>
+      <Menu.Item>
+        <IconFont name="icon-xiugaimima" />
+        修改密码
+      </Menu.Item>
+      <Menu.Item>
+        <IconFont name="icon-info" />
+        关于
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item>
+        <Button>退出登录</Button>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     isLogin ?
     null :
@@ -33,8 +51,15 @@ function LayoutFrame(props: any) {
         <NavLink exact to="/" className="app-header-nav-item">图标管理</NavLink>
         <NavLink to="/manage-user" className="app-header-nav-item">用户管理</NavLink>
         <NavLink to="/manage-projhect" className="app-header-nav-item">使用文档</NavLink>
-        <div className="app-header-nav-item">Github</div>
+        <a target="_blank" href="https://github.com/all-in-js/pineapple-admin" className="app-header-nav-item">Github</a>
         <div className="app-header-nav-item">EN / ZH</div>
+        <Dropdown overlay={content} className="app-header-user-info">
+          <span>
+            <IconFont name="icon-user1" />
+            Admin
+            <IconFont name="icon-Icon-KeyboardArrow-Down-Rounded1" />
+          </span>
+        </Dropdown>
       </div>
     </header>
   )

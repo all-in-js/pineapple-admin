@@ -178,6 +178,20 @@ input::placeholder {
   }
 }
 
+.app-header-user-info {
+  margin: 0 0 0 25px;
+  cursor: pointer;
+  .icon-user1 {
+    margin-right: 5px;
+    font-size: 20px;
+    vertical-align: bottom;
+  }
+  .icon-Icon-KeyboardArrow-Down-Rounded1 {
+    margin-left: 5px;
+    vertical-align: bottom;
+  }
+}
+
 /*
 * manage-user-page
 */
